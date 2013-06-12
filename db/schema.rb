@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612045929) do
+ActiveRecord::Schema.define(:version => 20130612054104) do
 
   create_table "administrators", :force => true do |t|
     t.string   "fullname"
@@ -43,16 +43,19 @@ ActiveRecord::Schema.define(:version => 20130612045929) do
 
   create_table "inventory_object_versions", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "inventory_object_type_id"
   end
 
   create_table "inventory_objects", :force => true do |t|
     t.string   "id1"
     t.string   "id2"
     t.string   "id3"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "inventory_object_type_id"
+    t.integer  "inventory_object_version_id"
   end
 
   create_table "loanees", :force => true do |t|
