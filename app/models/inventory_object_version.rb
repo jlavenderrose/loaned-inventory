@@ -1,5 +1,15 @@
 class InventoryObjectVersion < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :inventory_object_type_name
+  
+  def inventory_object_type_name
+	inventory_object_type.name unless inventory_object_type.nil?
+  end
+  
+  def inventory_object_type_name=(name)
+	inventory_object_type = InventoryObjectType.find_by_name(name) or InventoryObjectType.create(name: name)
+  end
+  
+  validates :name, :uniqueness => true
   
   belongs_to :inventory_object_type	
   has_many :objects, :foreign_key => 'inventory_object_version_id', :class_name => 'InventoryObject'

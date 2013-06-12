@@ -1,26 +1,10 @@
-<%= form_for @inventory_object, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :id1, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :id1, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :id2, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :id2, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :id3, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :id3, :class => 'text_field' %>
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                inventory_objects_path, :class => 'btn' %>
-  </div>
-<% end %>
+  <%= semantic_form_for @inventory_object do |f| %>
+    <%= f.inputs do %>
+		<%= f.input :inventory_object_version, :as => :select, 
+					:collection => @inventory_object.inventory_object_version.inventory_object_type.versions.all %>
+		<%= f.input :id1 %>
+		<%= f.input :id2 %>
+		<%= f.input :id3 %>
+    <% end %>
+    <%= f.actions %>
+  <% end %>
