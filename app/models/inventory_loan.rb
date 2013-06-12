@@ -7,4 +7,8 @@ class InventoryLoan < ActiveRecord::Base
   validates_associated :inventory_object
   validates_associated :loanee
   #validates only current loan for each inventory_object
+  
+  def search(query)
+	
+  end
 end

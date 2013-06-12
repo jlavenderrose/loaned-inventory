@@ -1,4 +1,6 @@
 class InventoryObject < ActiveRecord::Base
+  include FullTextQuery
+
   attr_accessible :id1, :id2, :id3, 
 				  :inventory_object_version_id
   
@@ -6,5 +8,18 @@ class InventoryObject < ActiveRecord::Base
   has_many :inventory_loans
   has_many :loanees, :through => :inventory_loans
   
+  validates :id1, :uniqueness => true
+  validates :id2, :uniqueness => true
+  validates :id3, :uniqueness => true
+  
   accepts_nested_attributes_for :inventory_object_version
+  
+  def search(query)
+	@res = like_query InventoryObject, {:id1 => query, :id2 => query, :id3 => query}
+	if @res.length == 1 then
+		@res.first
+	else
+		@res
+	end
+  end
 end
