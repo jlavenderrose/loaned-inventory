@@ -1,5 +1,5 @@
 class InventoryLoan < ActiveRecord::Base
-  attr_accessible :loaned_date, :returned_date
+  attr_accessible :loaned_date, :returned_date, :loanee, :inventory_object
   
   belongs_to :inventory_object
   belongs_to :loanee
