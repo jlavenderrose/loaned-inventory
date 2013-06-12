@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  loaned_date: 2013-06-11
+  returned_date: 2013-06-11
+
+two:
+  loaned_date: 2013-06-11
+  returned_date: 2013-06-11

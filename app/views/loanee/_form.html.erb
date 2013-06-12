@@ -1,0 +1,20 @@
+<%= form_for @loanee, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :fullname, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :fullname, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :idnum, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :idnum, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                loanee_path, :class => 'btn' %>
+  </div>
+<% end %>

@@ -11,12 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612034754) do
+ActiveRecord::Schema.define(:version => 20130612042912) do
+
+  create_table "inventory_loans", :force => true do |t|
+    t.date     "loaned_date"
+    t.date     "returned_date"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "inventory_object_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "inventory_object_versions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "inventory_objects", :force => true do |t|
     t.string   "id1"
     t.string   "id2"
     t.string   "id3"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "loanees", :force => true do |t|
+    t.string   "fullname"
+    t.string   "idnum"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

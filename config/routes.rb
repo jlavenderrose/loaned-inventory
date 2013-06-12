@@ -1,4 +1,16 @@
 LoanedInventory::Application.routes.draw do
+  resources :inventory_loans
+
+
+  resources :loanees
+
+
+  resources :inventory_object_versions
+
+
+  resources :inventory_object_types
+
+
   resources :inventory_objects
 
 

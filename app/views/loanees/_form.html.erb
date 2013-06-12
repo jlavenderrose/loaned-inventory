@@ -1,0 +1,25 @@
+<%= form_for(@loanee) do |f| %>
+  <% if @loanee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@loanee.errors.count, "error") %> prohibited this loanee from being saved:</h2>
+
+      <ul>
+      <% @loanee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fullname %><br />
+    <%= f.text_field :fullname %>
+  </div>
+  <div class="field">
+    <%= f.label :idnum %><br />
+    <%= f.text_field :idnum %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
