@@ -36,3 +36,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'therubyracer'
+gem 'twitter-bootstrap-rails'

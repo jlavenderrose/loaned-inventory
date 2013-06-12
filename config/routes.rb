@@ -1,4 +1,7 @@
 LoanedInventory::Application.routes.draw do
+  resources :inventory_objects
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
