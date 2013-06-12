@@ -8,8 +8,7 @@
 admins = Administrator.create(fullname: 'Julian R. Moore', username: 'jmoore', password: 'admin', password_confirmation: 'admin')
 
 computers = InventoryObjectType.create(name: 'Laptops')
-dells = computers.versions.create(name: 'Dell Latitude 2120')
-dells.save
+dells = computers.versions.findcreate('Dell Latitude 2120')
 mydell = dells.objects.create(id1: 'DELLN47', id2: 'JVTPFT1')
 
 books = InventoryObjectType.create(name: 'Textbooks')

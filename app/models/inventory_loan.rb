@@ -6,7 +6,12 @@ class InventoryLoan < ActiveRecord::Base
   
   validates_associated :inventory_object
   validates_associated :loanee
+  validates :loaned_date, :presence => :true
   validate :only_current_loan, :on => :create
+  
+  #default values
+  after_initialize :init
+  before_validation :init
   
   #is this loan current?
   def current?
@@ -20,5 +25,9 @@ class InventoryLoan < ActiveRecord::Base
 	if (inventory_object.inventory_loans.select {|loan| loan.current? && loan != self}).count != 0 then
 		errors.add(:inventory_object, "An Inventory Object may only be loaned to one Loanee at a time!")
 	end
+  end
+  
+  def init
+	loaned_date ||= Date.today
   end
 end

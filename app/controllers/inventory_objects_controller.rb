@@ -88,21 +88,29 @@ class InventoryObjectsController < ApplicationController
   
   def upload
 	if params[:csv] then
-		csv = CSV.new(params[:csv].read, :headers => :downcase, 
-					 :header_converters=> lambda {|f| f.strip},
+		csv = CSV.new(params[:csv].read, :headers => :true,
+					 :header_converters=> lambda {|f| f.strip.downcase},
 				     :converters=> lambda {|f| f ? f.strip : nil})
 		@good = []
 		@bad = []
 		csv.each do |row|
 				#Type Version Id1 Id2 Id3
 				if (row['id1'] || row['id2'] || row['id3']) then
-				type = InventoryObjectType.new.findcreate(row['type'])
-				version = type.versions.findcreate(row['version'])
-				
-				object = InventoryObject.create(id1: row['id1'], id2: row['id2'], id3: row['id3'])
-				
-				@good << row if object
-				@bad << row unless object
+					version = 0
+					unless row['type'].nil? then
+							type = InventoryObjectType.new.findcreate(row['type'])
+							version = type.versions.findcreate(row['version'])
+						else
+							version = InventoryObjectVersion.find_by_name(row['version'])
+					end
+					if version then
+						object = version.objects.create(id1: row['id1'], id2: row['id2'], id3: row['id3'])
+						
+						@good << {:row => row, :errors => object.errors} if object.valid?
+						@bad << {:row => row, :errors => object.errors} unless object.valid?
+					else
+						@bad << {:row => row, :errors => ["version", "does not exist"]}
+					end
 			end
 		end
 	end
