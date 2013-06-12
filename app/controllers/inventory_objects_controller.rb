@@ -1,3 +1,5 @@
+require 'csv'
+
 class InventoryObjectsController < ApplicationController
   # GET /inventory_objects
   # GET /inventory_objects.json
@@ -79,5 +81,30 @@ class InventoryObjectsController < ApplicationController
       format.html { redirect_to inventory_objects_url }
       format.json { head :no_content }
     end
+  end
+  
+  def import
+  end
+  
+  def upload
+	if params[:csv] then
+		csv = CSV.new(params[:csv].read, :headers => :downcase, 
+					 :header_converters=> lambda {|f| f.strip},
+				     :converters=> lambda {|f| f ? f.strip : nil})
+		@good = []
+		@bad = []
+		csv.each do |row|
+				#Type Version Id1 Id2 Id3
+				if (row['id1'] || row['id2'] || row['id3']) then
+				type = InventoryObjectType.new.findcreate(row['type'])
+				version = type.versions.findcreate(row['version'])
+				
+				object = InventoryObject.create(id1: row['id1'], id2: row['id2'], id3: row['id3'])
+				
+				@good << row if object
+				@bad << row unless object
+			end
+		end
+	end
   end
 end

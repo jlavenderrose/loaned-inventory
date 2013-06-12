@@ -20,7 +20,12 @@ LoanedInventory::Application.routes.draw do
   resources :inventory_object_types
 
 
-  resources :inventory_objects
+  resources :inventory_objects do
+	collection do
+		get 'import'
+		post 'upload'
+	end
+  end
 
 
   # The priority is based upon order of creation:
