@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612042912) do
+ActiveRecord::Schema.define(:version => 20130612045929) do
+
+  create_table "administrators", :force => true do |t|
+    t.string   "fullname"
+    t.string   "username"
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "audit_log_entries", :force => true do |t|
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "inventory_loans", :force => true do |t|
     t.date     "loaned_date"
@@ -43,6 +58,17 @@ ActiveRecord::Schema.define(:version => 20130612042912) do
   create_table "loanees", :force => true do |t|
     t.string   "fullname"
     t.string   "idnum"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "report_entries", :force => true do |t|
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "report_entry_objects", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

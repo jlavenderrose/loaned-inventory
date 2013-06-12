@@ -1,4 +1,13 @@
 LoanedInventory::Application.routes.draw do
+  resources :report_entries
+
+
+  resources :audit_log_entries
+
+
+  resources :administrators
+
+
   resources :inventory_loans
 
 
