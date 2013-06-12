@@ -5,4 +5,5 @@ class Loanee < ActiveRecord::Base
   has_many :objects, :through => :inventory_loans,
 					 :foreign_key => 'inventory_object_id',
 					 :class_name => 'InventoryObjects'
+					 
 end

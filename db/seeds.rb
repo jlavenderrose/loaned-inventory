@@ -16,4 +16,4 @@ books = InventoryObjectType.create(name: 'Textbooks')
 books.versions.create(name: 'Some Awful Textbook')
 
 julian = Loanee.create(fullname: 'Julian R. Moore', idnum: '10082')
-mydell.inventory_loans.create(loanee: julian) 
+mydell.inventory_loans.create(loanee_id: julian.id) 
