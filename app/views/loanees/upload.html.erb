@@ -1,0 +1,8 @@
+<h3>Successfully imported <%= @good.count %> Loanees! </h3>
+<% @bad.each do |record| %>
+	<%= record[:row]['idnum'] %>
+	<% record[:errors].each do |error, msg| %>
+		<%= error %> : <%= msg %>
+	<% end %>
+	</br>
+<% end %>

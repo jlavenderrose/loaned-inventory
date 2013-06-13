@@ -12,6 +12,13 @@
   <dd><%= @inventory_object.id3 %></dd>
 </dl>
 
+<dl class="dl-horizontal">
+	<% @inventory_object.inventory_loans.each do |loan| %>
+	<dt><%= loan.loanee.fullname %></dt>
+	<dd><%= loan.inventory_object.id1 %></dd>
+	<% end %>
+</dl>
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               inventory_objects_path, :class => 'btn'  %>

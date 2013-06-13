@@ -1,0 +1,4 @@
+<%= form_tag({:action => :upload}, :multipart => true, :url => upload_inventory_loans_path) do %>
+  <%= file_field_tag 'csv' %>
+  <%= submit_tag "Import Inventory Loans CSV" %>
+<% end %>

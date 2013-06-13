@@ -80,4 +80,24 @@ class InventoryLoansController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def import
+  end
+  
+  def upload
+	if params[:csv] then
+		csv = CSV.new(params[:csv].read, :headers => :true,
+					 :header_converters=> lambda {|f| f.strip.downcase},
+				     :converters=> lambda {|f| f ? f.strip : nil})
+		@good = []
+		@bad = []
+		csv.each do |row|
+			object = InventoryLoan.create(loanee_name: row['loanee'],
+										  inventory_object_name: row['inventory object'])
+			
+			@good << {row: row, errors: object.errors} if object.valid?
+			@bad << {row: row, errors: object.errors} unless object.valid?
+		end
+	end
+  end
 end

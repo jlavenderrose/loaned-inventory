@@ -1,3 +1,5 @@
+require 'csv'
+
 class LoaneesController < ApplicationController
   # GET /loanees
   # GET /loanees.json
@@ -79,5 +81,32 @@ class LoaneesController < ApplicationController
       format.html { redirect_to loanees_url }
       format.json { head :no_content }
     end
+  end
+  
+  def import
+  end
+  
+  def upload
+	if params[:csv] then
+		csv = CSV.new(params[:csv].read, :headers => :true,
+					 :header_converters=> lambda {|f| f.strip.downcase},
+				     :converters=> lambda {|f| f ? f.strip : nil})
+		@good = []
+		@bad = []
+		csv.each do |row|
+			name = ''
+			if row['full name'] then
+				name = row['full name']
+			else
+				name += row['first name'] if row['first name']
+				name += " " + row['last name'] if row['last name']
+			end	
+			
+			object = Loanee.create(fullname: name, idnum: row['idnum'])
+			
+			@good << {row: row, errors: object.errors} if object.valid?
+			@bad << {row: row, errors: object.errors} unless object.valid?
+		end
+	end
   end
 end

@@ -8,10 +8,20 @@ LoanedInventory::Application.routes.draw do
   resources :administrators
 
 
-  resources :inventory_loans
+  resources :inventory_loans do
+	collection do
+		get 'import'
+		post 'upload'
+	end
+  end
 
 
-  resources :loanees
+  resources :loanees do
+	collection do
+		get 'import'
+		post 'upload'
+	end
+  end
 
 
   resources :inventory_object_versions
