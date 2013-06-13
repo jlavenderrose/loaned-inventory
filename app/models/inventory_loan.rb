@@ -17,17 +17,24 @@ class InventoryLoan < ActiveRecord::Base
   
   #name accessors/getters
   def inventory_object_name=(name)
-	object = InventoryObject.new.search(name)
-	logger.debug object
-	self.inventory_object = object unless object.respond_to?('count')
+    object = InventoryObject.new.search(name)
+    logger.debug object
+    self.inventory_object = object unless object.respond_to?('count')
+  end
+
+  def inventory_object_name
+    self.inventory_object.nil? ? "" : self.inventory_object.id1 
   end
   
   def loanee_name=(name)
-	loanee_res = Loanee.new.search(name)
-	logger.debug loanee_res
-	self.loanee = loanee_res unless loanee_res.respond_to?('count')
+    loanee_res = Loanee.new.search(name)
+    logger.debug loanee_res
+    self.loanee = loanee_res unless loanee_res.respond_to?('count')
   end
   
+  def loanee_name
+    self.loanee.nil? ? "" : self.loanee.fullname
+  end
   #is this loan current?
   def current?
 	returned_date.nil?

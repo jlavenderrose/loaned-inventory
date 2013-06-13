@@ -1,4 +1,4 @@
   <%= semantic_form_for @inventory_loan do |f| %>
-    <%= f.inputs %>
+    <%= f.inputs :inventory_object_name, :loanee_name, :loaned_date %>
     <%= f.actions %>
   <% end %>

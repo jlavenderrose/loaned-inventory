@@ -37,26 +37,24 @@
   <body>
 
     <%= nav_bar :static => :top, :brand => "Loaned Inventory", :responsive => true do %>
-    <% menu_group do %>
-        <%= menu_item "Home", "/" %>
-        <%= menu_item "About Us", "/" %>
-        <%= menu_item "Contact", "/" %>
-    <% end %>
+		<% menu_group do %>
+			<%= drop_down "Import/Export" do %>
+				<%= menu_item "Inventory Objects", import_inventory_objects_path %>
+				<%= menu_item "Inventory Loans", import_inventory_loans_path %>
+				<%= menu_item "Loanees", import_loanees_path %>
+			<% end %>
+			<%= drop_down "Add" do %>
+				<%= menu_item "Inventory Objects", new_inventory_object_path %>
+				<%= menu_item "Inventory Loans", new_inventory_loan_path %>
+				<%= menu_item "Inventory Objects Versions", new_inventory_object_version_path %>
+				<%= menu_item "Inventory Objects Types", new_inventory_object_type_path %>
+				<%= menu_item "Loanees", new_inventory_object_path %>
+			<% end %>
+		<% end %>
     <% end %>
 
     <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
+        <div class="span12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

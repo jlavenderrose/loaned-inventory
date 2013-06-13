@@ -1,25 +1,20 @@
-<%= form_for(@loanee) do |f| %>
-  <% if @loanee.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@loanee.errors.count, "error") %> prohibited this loanee from being saved:</h2>
-
-      <ul>
-      <% @loanee.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @loanee, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :fullname, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :fullname, :class => 'text_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :idnum, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :idnum, :class => 'text_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :fullname %><br />
-    <%= f.text_field :fullname %>
-  </div>
-  <div class="field">
-    <%= f.label :idnum %><br />
-    <%= f.text_field :idnum %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                loanees_path, :class => 'btn' %>
   </div>
 <% end %>

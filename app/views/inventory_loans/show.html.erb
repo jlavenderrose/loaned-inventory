@@ -7,7 +7,11 @@
   <dt><strong><%= model_class.human_attribute_name(:loaned_date) %>:</strong></dt>
   <dd><%= @inventory_loan.loaned_date %></dd>
   <dt><strong><%= model_class.human_attribute_name(:returned_date) %>:</strong></dt>
-  <dd><%= @inventory_loan.returned_date %></dd>
+  <dd><%= @inventory_loan.returned_date || "Not returned" %></dd>
+  <dt>Loanee</dt>
+  <dd><%= link_to @inventory_loan.loanee_name, @inventory_loan.loanee %></dd>
+  <dt>Inventory Object</dt>
+  <dd><%= link_to @inventory_loan.inventory_object_name, @inventory_loan.inventory_object %></dd>
 </dl>
 
 <div class="form-actions">

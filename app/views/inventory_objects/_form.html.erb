@@ -1,7 +1,11 @@
   <%= semantic_form_for @inventory_object do |f| %>
     <%= f.inputs do %>
-		<%= f.input :inventory_object_version, :as => :select, 
-					:collection => @inventory_object.inventory_object_version.inventory_object_type.versions.all %>
+    <% unless @inventory_object.new_record? %>
+      <%= f.input :inventory_object_version, :as => :select, 
+        :collection => @inventory_object.inventory_object_version.inventory_object_type.versions.all %>
+    <% else %>
+      <%= f.input :inventory_object_version, :as => :select %>
+    <% end %>
 		<%= f.input :id1 %>
 		<%= f.input :id2 %>
 		<%= f.input :id3 %>
