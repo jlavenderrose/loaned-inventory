@@ -39,3 +39,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'twitter-bootstrap-rails'
 gem 'formtastic'
+gem 'formtastic-bootstrap'

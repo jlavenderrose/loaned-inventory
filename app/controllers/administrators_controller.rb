@@ -10,26 +10,10 @@ class AdministratorsController < ApplicationController
     end
   end
 
-  # GET /administrators/1
-  # GET /administrators/1.json
-  def show
-    @administrator = Administrator.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @administrator }
-    end
-  end
-
   # GET /administrators/new
   # GET /administrators/new.json
   def new
-    @administrator = Administrator.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @administrator }
-    end
+	@administrator = Administrator.new
   end
 
   # GET /administrators/1/edit
@@ -80,4 +64,5 @@ class AdministratorsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

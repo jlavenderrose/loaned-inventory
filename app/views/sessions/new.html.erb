@@ -1,0 +1,11 @@
+<h1>Login</h1>
+<%= form_for(:session, url: login_path) do |f| %>
+
+  <%= f.label :username %>
+  <%= f.text_field :username, class: "input-xlarge", placeholder: "Username" %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, class: "input-xlarge", placeholder: "Password" %><br/>
+
+  <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+<% end %>
