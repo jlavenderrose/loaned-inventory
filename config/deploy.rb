@@ -17,6 +17,11 @@ server "10.1.2.24", :app, :web, :db, :primary => true
 after 'deploy:create_symlink', 'deploy:symlink_db'
 
 namespace :deploy do
+  desc 'Load DB schema - CAUTION: rewrites database!'
+  task :load_schema, :roles => :app do
+    run "cd #{current_path}; bundle exec rake db:schema:load RAILS_ENV=#{rails_env}"
+  end
+
   desc "Symlinks the database.yml"
   task :symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
