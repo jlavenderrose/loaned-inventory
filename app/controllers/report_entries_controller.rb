@@ -25,6 +25,7 @@ class ReportEntriesController < ApplicationController
   # GET /report_entries/new.json
   def new
     @report_entry = ReportEntry.new
+    @report_entry.administrator = current_user
 
     respond_to do |format|
       format.html # new.html.erb

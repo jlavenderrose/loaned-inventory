@@ -4,18 +4,18 @@ class InventoryObjectsController < ApplicationController
   # GET /inventory_objects
   # GET /inventory_objects.json
   def index
-    @inventory_objects = InventoryObject.all
+    @inventory_objects = InventoryObject.new.search(params[:search]) if params[:search]
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @inventory_objects }
-    end
+    redirect_to @inventory_objects unless @inventory_objects.nil? or @inventory_objects.respond_to?('count')
   end
 
   # GET /inventory_objects/1
   # GET /inventory_objects/1.json
   def show
     @inventory_object = InventoryObject.find(params[:id])
+    
+    @report_entry = @inventory_object.report_entries.new
+    @report_entry.administrator = current_user
 
     respond_to do |format|
       format.html # show.html.erb

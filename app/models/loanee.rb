@@ -9,11 +9,11 @@ class Loanee < ActiveRecord::Base
 					 :class_name => 'InventoryObjects'
 
   def search(query)
-	@res = like_query Loanee, {:fullname => query, :idnum => query}
-	if @res.length == 1 then
-		@res.first
-	else
-		@res
-	end
+    @res = like_query Loanee, {:fullname => query, :idnum => query}
+    if @res.length == 1 then
+      @res.first
+    else
+      @res
+    end
   end
 end

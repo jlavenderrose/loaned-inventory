@@ -18,7 +18,6 @@ class InventoryLoan < ActiveRecord::Base
   #name accessors/getters
   def inventory_object_name=(name)
     object = InventoryObject.new.search(name)
-    logger.debug object
     self.inventory_object = object unless object.respond_to?('count')
   end
 
@@ -37,17 +36,17 @@ class InventoryLoan < ActiveRecord::Base
   end
   #is this loan current?
   def current?
-	returned_date.nil?
+    returned_date.nil?
   end
   
   private
   #validates that there is only one current loan for each inventory_object
   def only_current_loan
-	#if the attached object has another other current loans give an error
-	if inventory_object &&
-	   (inventory_object.inventory_loans.select {|loan| loan.current? && loan != self}).count != 0 then
-		errors.add(:inventory_object, "An Inventory Object may only be loaned to one Loanee at a time!")
-	end
+    #if the attached object has another other current loans give an error
+    if inventory_object &&
+       (inventory_object.inventory_loans.select {|loan| loan.current? && loan != self}).count != 0 then
+      errors.add(:inventory_object, "An Inventory Object may only be loaned to one Loanee at a time!")
+    end
   end
   
   def init

@@ -1,14 +1,13 @@
-<%= form_for @report_entry, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :body, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :body, :class => 'text_area' %>
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                report_entries_path, :class => 'btn' %>
-  </div>
+<%= semantic_form_for @report_entry do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :administrator_id, :as => :hidden %>
+    <% if @report_entry.inventory_object_id then %>
+      <%= f.input :inventory_object_id, :as => :hidden %>
+    <% else %>
+      <%= f.input :inventory_object_name %>
+    <% end %>
+    <%= f.input :body, :input_html => { :class => 'autogrow', :rows => 5, :cols => 25 }%>
+    <%= f.input :open_issue %>
+  <% end %>
+  <%= f.actions %>
 <% end %>

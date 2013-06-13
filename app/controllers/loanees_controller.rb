@@ -4,12 +4,9 @@ class LoaneesController < ApplicationController
   # GET /loanees
   # GET /loanees.json
   def index
-    @loanees = Loanee.all
+    @loanees = Loanee.new.search(params[:search]) if params[:search]
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @loanees }
-    end
+    redirect_to @loanees unless @loanees.nil? or @loanees.respond_to?('count')
   end
 
   # GET /loanees/1

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612163450) do
+ActiveRecord::Schema.define(:version => 20130613071628) do
 
   create_table "administrators", :force => true do |t|
     t.string   "fullname"
@@ -69,13 +69,18 @@ ActiveRecord::Schema.define(:version => 20130612163450) do
 
   create_table "report_entries", :force => true do |t|
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "administrator_id"
+    t.integer  "inventory_object_id"
+    t.boolean  "open_issue"
   end
 
   create_table "report_entry_objects", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "report_entry_id"
+    t.integer  "inventory_object_id"
   end
 
 end
