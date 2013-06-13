@@ -79,7 +79,16 @@ class LoaneesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  #CSV export
+  def export
+    respond_to do |format|
+      format.csv { render :csv => Loanee.all,
+                          :filename => "loanee_all.csv" }
+    end
+  end
   
+  #CSV import
   def import
   end
   

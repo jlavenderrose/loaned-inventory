@@ -12,6 +12,7 @@ LoanedInventory::Application.routes.draw do
 	collection do
 		get 'import'
 		post 'upload'
+    get 'export'
 	end
   end
 
@@ -20,6 +21,7 @@ LoanedInventory::Application.routes.draw do
 	collection do
 		get 'import'
 		post 'upload'
+    get 'export'
 	end
   end
 
@@ -34,6 +36,7 @@ LoanedInventory::Application.routes.draw do
 	collection do
 		get 'import'
 		post 'upload'
+    get 'export'
 	end
   end
 

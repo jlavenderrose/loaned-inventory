@@ -39,6 +39,11 @@ class InventoryLoan < ActiveRecord::Base
     returned_date.nil?
   end
   
+  comma do
+    inventory_object_name "Inventory Object"
+    loanee_name "Loanee"
+  end
+  
   private
   #validates that there is only one current loan for each inventory_object
   def only_current_loan

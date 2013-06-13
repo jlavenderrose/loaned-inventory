@@ -80,7 +80,15 @@ class InventoryLoansController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  #CSV export
+  def export
+    respond_to do |format|
+      format.csv { render :csv => InventoryLoan.all,
+                          :filename => "inventory_loan_all.csv" }
+    end
+  end
+  #CSV import
   def import
   end
   

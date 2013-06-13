@@ -44,6 +44,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    comma (3.0.4)
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -142,6 +143,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   capistrano
   coffee-rails (~> 3.2.1)
+  comma
   formtastic
   formtastic-bootstrap
   jquery-rails

@@ -83,6 +83,15 @@ class InventoryObjectsController < ApplicationController
     end
   end
   
+  #CSV export
+  def export
+    respond_to do |format|
+      format.csv { render :csv => InventoryObject.all,
+                          :filename => "inventory_full.csv" }
+    end
+  end
+  
+  #CSV import
   def import
   end
   

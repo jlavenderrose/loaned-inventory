@@ -43,3 +43,5 @@ gem 'capistrano'
 gem 'twitter-bootstrap-rails'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
+
+gem 'comma'

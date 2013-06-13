@@ -26,4 +26,23 @@ class InventoryObject < ActiveRecord::Base
       @res
     end
   end
+
+  #CSV export support
+  comma do
+    inventory_type_name 'Type'
+    inventory_version_name 'Version'
+    
+    id1 'id1'
+    id2 'id2'
+    id3 'id3'
+  end
+  
+  #CSV getters
+  def inventory_version_name
+    inventory_object_version.name
+  end
+  
+  def inventory_type_name
+    inventory_object_version.inventory_object_type.name
+  end
 end

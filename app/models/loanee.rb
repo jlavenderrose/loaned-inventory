@@ -16,4 +16,9 @@ class Loanee < ActiveRecord::Base
       @res
     end
   end
+  
+  comma do
+    fullname 'Full Name'
+    idnum 'idnum'
+  end
 end
