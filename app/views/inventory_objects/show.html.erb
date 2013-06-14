@@ -27,12 +27,10 @@
 
 <div class="span6">
   <h3>Reports:</h3>
-  <ol>
-    <% @inventory_object.report_entries.each do |report| %>
-      <li><%= report.body %></li>
-    <% end %>
-    <li>Add new report: <%= render 'report_entries/form' %></li>
-  </ol>
+  <% (@inventory_object.report_entries.select{ |e| !e.new_record? }).each do |report| %>
+    <%= render 'report_entries/show', :report => report %>
+  <% end %>
+  <%= render 'report_entries/form' %>
 </div>
 </div>
 

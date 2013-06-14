@@ -4,7 +4,8 @@
     <% if @report_entry.inventory_object_id then %>
       <%= f.input :inventory_object_id, :as => :hidden %>
     <% else %>
-      <%= f.input :inventory_object_tokens %>
+      <%= f.input :inventory_object_tokens,
+                  :input_html => {"data-pre" => @report_entry.inventory_objects.to_json} %>
     <% end %>
     <%= f.input :body, :input_html => { :class => 'autogrow', :rows => 5, :cols => 25 }%>
     <%= f.input :open_issue %>

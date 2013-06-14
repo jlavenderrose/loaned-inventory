@@ -28,6 +28,7 @@ class InventoryObjectsController < ApplicationController
     @inventory_object = InventoryObject.find(params[:id])
     
     @report_entry = @inventory_object.report_entries.new
+    @report_entry.inventory_object_ids = [@inventory_object.id]
     @report_entry.administrator = current_user
 
     respond_to do |format|
