@@ -37,6 +37,8 @@ LoanedInventory::Application.routes.draw do
 		get 'import'
 		post 'upload'
     get 'export'
+    
+    get 'autocomplete_tag_name'
 	end
   end
 

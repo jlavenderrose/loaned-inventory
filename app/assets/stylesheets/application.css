@@ -12,4 +12,5 @@
  *= require_tree 
  *= require formtastic-bootstrap
  *= require token-input-facebook
+ *= require jquery.ui.all
  */

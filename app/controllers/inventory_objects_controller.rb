@@ -1,18 +1,22 @@
 require 'csv'
 
 class InventoryObjectsController < ApplicationController
+  #tagging autocompletion
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
+  
   # GET /inventory_objects
   # GET /inventory_objects.json
   def index
     @inventory_objects = InventoryObject.new.search(params[:q]) if params[:q]
+    @inventory_objects += InventoryObject.tagged_with(params[:q])
 
     respond_to do |format|
       format.html {
-      unless @inventory_objects.nil? or @inventory_objects.respond_to?('count') then
-        redirect_to @inventory_objects
-      else
-        render
-      end
+        unless @inventory_objects.nil? or @inventory_objects.respond_to?('count') then
+          redirect_to @inventory_objects
+        else
+          render
+        end
       }
       #jQuery TokenInput support
       format.json { 

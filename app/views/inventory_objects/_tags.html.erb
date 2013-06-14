@@ -1,0 +1,7 @@
+<%= semantic_form_for @inventory_object, :html => {class: "form-inline"} do |f| %>    
+  <%= f.input :status_tag_list, 
+              :as => :autocomplete, 
+              :url => autocomplete_tag_name_inventory_objects_path, 
+              :input_html => {"data-delimiter" => ", ", class: "input-xlarge"} %>
+  <%= f.action :submit, :as => :button, label: "Update Tags", :button_html => {class: "btn btn-small"} %>
+<% end %>

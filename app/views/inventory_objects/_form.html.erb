@@ -9,6 +9,10 @@
 		<%= f.input :id1 %>
 		<%= f.input :id2 %>
 		<%= f.input :id3 %>
+    <%= f.input :status_tag_list, 
+                :as => :autocomplete, 
+                :url => autocomplete_tag_name_inventory_objects_path, 
+                :input_html => {"data-delimiter" => ", "} %>
     <% end %>
     <%= f.actions %>
   <% end %>

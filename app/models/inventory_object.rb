@@ -2,8 +2,10 @@ class InventoryObject < ActiveRecord::Base
   include FullTextQuery
 
   attr_accessible :id1, :id2, :id3,
-          :name,
+          :name, :status_tag_list,
 				  :inventory_object_version_id
+          
+  acts_as_taggable_on :status_tags
   
   belongs_to :inventory_object_version
   has_many :inventory_loans
