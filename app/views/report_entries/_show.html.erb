@@ -8,9 +8,11 @@
   <% link_to "Edit", edit_report_entry_path(report), :class => "btn btn-warning" %>
   <p><h6>Reported by: <%= report.administrator.fullname %> at <%= report.created_at %></h6></p>
   <p><h6>Applies to: 
+    <% objects = [] %>
     <% report.inventory_objects.each do |object| %>
-      <%= link_to object.id1, object %>, 
+      <% objects << link_to(object.id1, object) %> 
     <% end %>
+    <%= objects.join(',').html_safe %>
   </h6></p>
 </div>
 
