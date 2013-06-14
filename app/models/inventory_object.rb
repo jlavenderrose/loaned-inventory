@@ -6,6 +6,7 @@ class InventoryObject < ActiveRecord::Base
 				  :inventory_object_version_id
           
   acts_as_taggable_on :status_tags
+  ActsAsTaggableOn.force_lowercase = true
   
   belongs_to :inventory_object_version
   has_many :inventory_loans
