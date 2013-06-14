@@ -16,8 +16,10 @@
 //= require twitter/bootstrap
 //= require_tree .
 $(function () {
-  $('[id$="inventory_object_tokens"]').tokenInput('/inventory_objects.json', { crossDomain: false, preventDuplicates: true });
-  $('[id$="loanee_tokens"]').tokenInput('/inventory_objects.json', { crossDomain: false, preventDuplicates: true });
-  $('[id$="inventory_object_token"]').tokenInput('/inventory_objects.json', { crossDomain: false, tokenLimit: 1  });
-  $('[id$="loanee_token"]').tokenInput('/inventory_objects.json', { crossDomain: false, tokenLimit: 1 });
+  tokens = {crossDomain: false, preventDuplicates: true, theme: 'facebook'}
+  token = {crossDomain: false, preventDuplicates: true, tokenLimit: 1, theme: 'facebook'}
+  $('[id$="inventory_object_tokens"]').tokenInput('/inventory_objects.json', tokens);
+  $('[id$="loanee_tokens"]').tokenInput('/inventory_objects.json', tokens);
+  $('[id$="inventory_object_token"]').tokenInput('/inventory_objects.json', token);
+  $('[id$="loanee_token"]').tokenInput('/inventory_objects.json', token);
 });

@@ -5,8 +5,8 @@
   <% else %>
     <span class="label label-info">Closed</span>
   <% end %>
-  <% link_to "Edit", edit_report_entry_path(report), :class => "btn btn-warning" %>
   <p><h6>Reported by: <%= report.administrator.fullname %> at <%= report.created_at %></h6></p>
+  <%= link_to "Edit", edit_report_entry_path(report), :class => "btn btn-warning pull-right" %>
   <p><h6>Applies to: 
     <% objects = [] %>
     <% report.inventory_objects.each do |object| %>
