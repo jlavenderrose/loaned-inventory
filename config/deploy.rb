@@ -28,20 +28,6 @@ namespace :deploy do
   end
 
   desc "Start the Thin processes"
-  task :start do
-    sudo  <<-CMD
-      /etc/init.d/thin start
-    CMD
-  end
-
-  desc "Stop the Thin processes"
-  task :stop do
-    sudo  <<-CMD
-      /etc/init.d/thin stop
-    CMD
-  end
-
-  desc "Start the Thin processes"
   task :restart do
     sudo <<-CMD
       /etc/init.d/thin restart

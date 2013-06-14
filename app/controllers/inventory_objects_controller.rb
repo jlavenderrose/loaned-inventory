@@ -10,10 +10,10 @@ class InventoryObjectsController < ApplicationController
     @inventory_objects = array_wrap InventoryObject.new.search(params[:q]) if params[:q]
     @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q])
 
-
+    
     respond_to do |format|
       format.html {
-        unless @inventory_objects.count == 1 then
+        if @inventory_objects.count == 1 then
           redirect_to @inventory_objects.first
         else
           render
