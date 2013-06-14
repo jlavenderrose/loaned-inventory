@@ -7,23 +7,31 @@ class InventoryObjectsController < ApplicationController
   # GET /inventory_objects
   # GET /inventory_objects.json
   def index
-    @inventory_objects = InventoryObject.new.search(params[:q]) if params[:q]
-    @inventory_objects += InventoryObject.tagged_with(params[:q])
+    @inventory_objects = array_wrap InventoryObject.new.search(params[:q]) if params[:q]
+    @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q])
+
 
     respond_to do |format|
       format.html {
-        unless @inventory_objects.nil? or @inventory_objects.respond_to?('count') then
-          redirect_to @inventory_objects
+        unless @inventory_objects.count == 1 then
+          redirect_to @inventory_objects.first
         else
           render
         end
       }
       #jQuery TokenInput support
       format.json { 
-        @inventory_objects = [@inventory_objects] unless @inventory_objects.nil? or @inventory_objects.respond_to?('count')
         render :json => @inventory_objects
       }
       end
+  end
+  
+  def array_wrap (obj)
+    if obj.respond_to?('count')
+      obj
+    else
+      [obj]
+    end
   end
 
   # GET /inventory_objects/1
