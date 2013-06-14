@@ -4,9 +4,22 @@ class InventoryObjectsController < ApplicationController
   # GET /inventory_objects
   # GET /inventory_objects.json
   def index
-    @inventory_objects = InventoryObject.new.search(params[:search]) if params[:search]
+    @inventory_objects = InventoryObject.new.search(params[:q]) if params[:q]
 
-    redirect_to @inventory_objects unless @inventory_objects.nil? or @inventory_objects.respond_to?('count')
+    respond_to do |format|
+      format.html {
+      unless @inventory_objects.nil? or @inventory_objects.respond_to?('count') then
+        redirect_to @inventory_objects
+      else
+        render
+      end
+      }
+      #jQuery TokenInput support
+      format.json { 
+        @inventory_objects = [@inventory_objects] unless @inventory_objects.nil? or @inventory_objects.respond_to?('count')
+        render :json => @inventory_objects
+      }
+      end
   end
 
   # GET /inventory_objects/1

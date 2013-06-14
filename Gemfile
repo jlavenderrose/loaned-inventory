@@ -44,4 +44,8 @@ gem 'twitter-bootstrap-rails'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 
+gem 'nifty-generators'
+gem 'jquery-rails'
+gem 'jquery-tokeninput-rails'
+
 gem 'comma'

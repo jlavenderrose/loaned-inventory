@@ -51,10 +51,10 @@
 				<%= menu_item "Loanees", new_inventory_object_path %>
 			<% end %>
       <form class="navbar-search pull-left" action="<%= inventory_objects_path %>" method="get">
-        <input type="text" class="search-query span2" name="search" placeholder="Inventory Search">
+        <input type="text" class="search-query span2" name="q" placeholder="Inventory Search">
       </form>
       <form class="navbar-search pull-left" action="<%= loanees_path %>" method="get">
-        <input type="text" class="search-query span2" name="search" placeholder="Loanee Search">
+        <input type="text" class="search-query span2" name="q" placeholder="Loanee Search">
       </form>
       <% if current_user %>
           <%= menu_item "Log Out", logout_path %>

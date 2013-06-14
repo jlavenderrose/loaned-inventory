@@ -14,8 +14,8 @@ module FullTextQuery
     query = ""
     query_array = []
     kv.keys.sort.each do |key|
-		query = query_helper key, kv[key], query, query_array
-	end
+      query = query_helper key, kv[key], query, query_array
+    end
 	
     on.where(query, *query_array)
   end

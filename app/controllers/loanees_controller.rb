@@ -4,9 +4,22 @@ class LoaneesController < ApplicationController
   # GET /loanees
   # GET /loanees.json
   def index
-    @loanees = Loanee.new.search(params[:search]) if params[:search]
+    @loanees = Loanee.new.search(params[:q]) if params[:q]
 
-    redirect_to @loanees unless @loanees.nil? or @loanees.respond_to?('count')
+    respond_to do |format|
+      format.html {
+        unless @loanees.nil? or @loanees.respond_to?('count') then
+          redirect_to @loanees 
+        else
+          render
+        end
+      }
+      #CSV jQuery TokenInput support
+      format.json { 
+        @loanees = [@loanees] unless @loanees.nil? or @loanees.respond_to?('count')
+        render :json => @loanees
+      }
+    end
   end
 
   # GET /loanees/1

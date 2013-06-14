@@ -1,7 +1,8 @@
 class InventoryObject < ActiveRecord::Base
   include FullTextQuery
 
-  attr_accessible :id1, :id2, :id3, 
+  attr_accessible :id1, :id2, :id3,
+          :name,
 				  :inventory_object_version_id
   
   belongs_to :inventory_object_version
@@ -25,6 +26,14 @@ class InventoryObject < ActiveRecord::Base
     else
       @res
     end
+  end
+  
+  #jQuery.tokenInput support
+  def as_json options=nil
+    {
+      id: self.id,
+      name: [self.id1, self.id2, self.id3].join(' ')
+    }
   end
 
   #CSV export support

@@ -17,6 +17,13 @@ class Loanee < ActiveRecord::Base
     end
   end
   
+  def as_json options=nil
+    {
+      id: self.id,
+      name: self.fullname
+    }
+  end
+  
   comma do
     fullname 'Full Name'
     idnum 'idnum'

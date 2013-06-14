@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require twitter/bootstrap
 //= require_tree .
+$(function () {
+  $('[id~="inventory_object_tokens"]').tokenInput('/inventory_objects.json', { crossDomain: false });
+});
