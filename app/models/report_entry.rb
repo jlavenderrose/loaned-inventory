@@ -1,9 +1,8 @@
 class ReportEntry < ActiveRecord::Base
+  include InventoryObjectTokenInputtable
+
   attr_accessible :body, :open_issue, 
-                  :administrator_id, 
-                  :inventory_object_tokens
-  
-  attr_reader :inventory_object_tokens
+                  :administrator_id
   
   validates :body, :presence => true
   validates :administrator_id, :presence => true
@@ -12,10 +11,6 @@ class ReportEntry < ActiveRecord::Base
   has_many :report_entry_objects
   has_many :inventory_objects, :through => :report_entry_objects
   belongs_to :administrator
-  
-  def inventory_object_tokens=(ids)
-    self.inventory_object_ids = ids.split(",")
-  end
   
   private
   def inventory_objects_associated

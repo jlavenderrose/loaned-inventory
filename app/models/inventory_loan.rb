@@ -1,5 +1,9 @@
 class InventoryLoan < ActiveRecord::Base
-  attr_accessible :loaned_date, :returned_date, :loanee_id, :inventory_object_id, :loanee_name, :inventory_object_name
+  include InventoryObjectTokenInputtable
+  include LoaneeTokenInputtable
+
+  attr_accessible :loaned_date, :returned_date, :loanee_id, :inventory_object_id, 
+                  :loanee_name, :inventory_object_name
   
   belongs_to :inventory_object
   belongs_to :loanee

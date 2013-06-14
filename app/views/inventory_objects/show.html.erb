@@ -1,6 +1,6 @@
 <%- model_class = InventoryObject -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %>: <%= @inventory_object.id1 %></h1>
+  <h1><%=t '.title', :default => @inventory_object.inventory_object_version.name %>: <%= @inventory_object.id1 %></h1>
 </div>
 
 <div class="row-fluid">
@@ -12,6 +12,10 @@
     <dd><%= @inventory_object.id2 %></dd>
     <dt><strong><%= model_class.human_attribute_name(:id3) %>:</strong></dt>
     <dd><%= @inventory_object.id3 %></dd>
+    <dt>Type</dt>
+    <dd><%= @inventory_object.inventory_object_version.inventory_object_type.name %></dd>
+    <dt>Version</dt>
+    <dd><%= @inventory_object.inventory_object_version.name %></dd>
   </dl>
 
   <%= render 'tags' %>

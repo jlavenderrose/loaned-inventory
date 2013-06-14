@@ -1,4 +1,10 @@
   <%= semantic_form_for @inventory_loan do |f| %>
-    <%= f.inputs :inventory_object_name, :loanee_name, :loaned_date %>
+    <%= f.inputs do %>
+      <%= f.input :inventory_object_token,
+          :input_html => {"data-pre" => @inventory_loan.inventory_object.to_json} %>
+      <%= f.input :loanee_token,
+        :input_html => {"data-pre" => @inventory_loan.loanee.to_json} %>
+      <%= f.input :loaned_date %>
+    <% end %>
     <%= f.actions %>
   <% end %>
