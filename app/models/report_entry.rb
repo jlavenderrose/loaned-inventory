@@ -21,6 +21,6 @@ class ReportEntry < ActiveRecord::Base
   def inventory_objects_associated
     errors.add(:inventory_object_tokens,
       "A ReportEntry must be associated with atleast one InventoryObject") if
-      self.inventory_objects.count == 0
+      self.inventory_object_ids.count == 0
   end
 end
