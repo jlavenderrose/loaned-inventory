@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class AuditLogEntriesControllerTest < ActionController::TestCase
+  def setup
+    session[:user_token] = administrators(:one).remember_token
+  end
+  
   setup do
     @audit_log_entry = audit_log_entries(:one)
   end

@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class AdministratorsControllerTest < ActionController::TestCase
+  def setup
+    session[:user_token] = administrators(:one).remember_token
+  end
+
   setup do
     @administrator = administrators(:one)
   end

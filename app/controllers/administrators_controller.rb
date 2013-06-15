@@ -13,11 +13,15 @@ class AdministratorsController < ApplicationController
   # GET /administrators/new
   # GET /administrators/new.json
   def new
-	@administrator = Administrator.new
+    @administrator = Administrator.new
   end
 
   # GET /administrators/1/edit
   def edit
+    @administrator = Administrator.find(params[:id])
+  end
+  
+  def show
     @administrator = Administrator.find(params[:id])
   end
 

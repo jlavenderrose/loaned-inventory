@@ -1,7 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 one:
-  fullname: MyString
-
-two:
-  fullname: MyString
+    fullname: Julian R. Moore
+    username: jrmoore
+    remember_token: b

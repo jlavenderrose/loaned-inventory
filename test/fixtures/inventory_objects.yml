@@ -4,6 +4,7 @@ one:
   id1: MyString
   id2: MyString
   id3: MyString
+  inventory_object_version_id: 1
 
 two:
   id1: MyString

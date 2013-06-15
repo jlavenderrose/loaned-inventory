@@ -3,6 +3,7 @@ require 'test_helper'
 class LoaneesControllerTest < ActionController::TestCase
   setup do
     @loanee = loanees(:one)
+    session[:user_token] = administrators(:one).remember_token
   end
 
   test "should get index" do
