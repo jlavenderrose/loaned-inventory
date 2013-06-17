@@ -50,6 +50,9 @@
 				<%= menu_item "Inventory Objects Types", new_inventory_object_type_path %>
 				<%= menu_item "Loanees", new_inventory_object_path %>
 			<% end %>
+      <%= drop_down "POS" do %>
+        <%= menu_item "Create/Tag", point_of_sale_create_path %>
+      <% end %>
       <form class="navbar-search pull-left" action="<%= inventory_objects_path %>" method="get">
         <input type="text" class="search-query span2" name="q" placeholder="Inventory Search">
       </form>

@@ -1,4 +1,10 @@
-<%= semantic_form_for @inventory_object, :html => {class: "auto-form"} do |f| %>
-  <%= f.input :id1, :input_html => {class: "first last"} %>
-  <%= f.actions %>
+<%= form_tag(point_of_sale_create_path, :method => "post") do %>
+  ID2?:
+  <%= check_box_tag("pos_session[id2]", "1", @session_params[:id2]) %>
+  ID3?:
+  <%= check_box_tag("pos_session[id3]", "1", @session_params[:id3]) %>
+  <%= hidden_field_tag("pos_session[filler]", "1") %>
+  <%= autocomplete_field_tag 'inventory_object[status_tag_list]', '', autocomplete_tag_name_inventory_objects_path,
+      "data-delimiter" => ", " %>
+  <%= submit_tag 'Start' %>
 <% end %>

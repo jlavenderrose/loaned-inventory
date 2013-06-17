@@ -1,5 +1,5 @@
 class InventoryObjectVersion < ActiveRecord::Base
-  attr_accessible :name, :inventory_object_type_name
+  attr_accessible :name, :inventory_object_type_name, :inventory_object_type_id
   
   def inventory_object_type_name
 	inventory_object_type.name unless inventory_object_type.nil?
