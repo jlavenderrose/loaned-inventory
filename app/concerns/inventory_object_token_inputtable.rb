@@ -11,6 +11,6 @@ module InventoryObjectTokenInputtable
   end
   
   def inventory_object_token=(ids)
-    self.inventory_object_id = id
+    self.inventory_object_id = id.to_i
   end
 end

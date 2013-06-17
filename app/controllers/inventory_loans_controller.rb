@@ -41,7 +41,7 @@ class InventoryLoansController < ApplicationController
   # POST /inventory_loans.json
   def create
     @inventory_loan = InventoryLoan.new(params[:inventory_loan])
-
+  
     respond_to do |format|
       if @inventory_loan.save
         format.html { redirect_to @inventory_loan, notice: 'Inventory loan was successfully created.' }
