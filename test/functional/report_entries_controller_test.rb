@@ -3,6 +3,7 @@ require 'test_helper'
 class ReportEntriesControllerTest < ActionController::TestCase
   setup do
     @report_entry = report_entries(:one)
+    session[:user_token] = administrators(:one).remember_token
   end
 
   test "should get index" do

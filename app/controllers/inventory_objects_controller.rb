@@ -7,8 +7,11 @@ class InventoryObjectsController < ApplicationController
   # GET /inventory_objects
   # GET /inventory_objects.json
   def index
-    @inventory_objects = array_wrap InventoryObject.new.search(params[:q]) if params[:q]
-    @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q].downcase)
+    @inventory_objects = []
+    if params[:q] then
+      @inventory_objects = array_wrap InventoryObject.new.search(params[:q])
+      @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q].downcase)
+    end
 
     
     respond_to do |format|

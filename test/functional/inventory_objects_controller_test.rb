@@ -3,6 +3,7 @@ require 'test_helper'
 class InventoryObjectsControllerTest < ActionController::TestCase
   setup do
     @inventory_object = inventory_objects(:one)
+    session[:user_token] = administrators(:one).remember_token
   end
 
   test "should get index" do

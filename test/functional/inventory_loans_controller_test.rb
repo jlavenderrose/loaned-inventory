@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class InventoryLoansControllerTest < ActionController::TestCase
+
   setup do
     @inventory_loan = inventory_loans(:one)
+    session[:user_token] = administrators(:one).remember_token
   end
 
   test "should get index" do
