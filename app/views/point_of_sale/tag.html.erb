@@ -4,14 +4,15 @@
   <%= check_box_tag("pos_session[id2]", "1", @session_params[:id2]) %>
   ID3?:
   <%= check_box_tag("pos_session[id3]", "1", @session_params[:id3]) %>
+  <%= hidden_field_tag("pos_session[first]", false) %>
     <% id1_class = "first" %>
-    <% id1_class += " last" if (@session_params[:id2].nil? && @session_params[:id3].nil?) %>
+    <% id1_class += " last" unless (@session_params[:id2] || @session_params[:id3] || @session_params[:first] != 'false') %>
     <%= f.input :id1, :input_html => {class: id1_class} %>
-  <% unless @session_params[:id2] %>
+  <% if @session_params[:id2] %>
     <% id2_class = "last" unless @session_params[:id3] %>
     <%= f.input :id2, :input_html => {class: id2_class} %>
   <% end %>
-  <% unless @session_params[:id3] %>
+  <% if @session_params[:id3] %>
     <%= f.input :id3, :input_html => {class: "last"} %>
   <% end %>
   <%= f.input :status_tag_list, 

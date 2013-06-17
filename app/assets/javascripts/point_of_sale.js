@@ -4,6 +4,6 @@ $(function() {
   $("input.first").focus()
   //submit form on last field defocus (scanner sends tab after data)
   $("input.last").blur(function() {
-    $("form.auto-form").submit()
+    $("form.auto-form").delay(100).submit();
   })
 })
