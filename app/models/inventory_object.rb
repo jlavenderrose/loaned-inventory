@@ -12,8 +12,15 @@ class InventoryObject < ActiveRecord::Base
   has_many :inventory_loans
   has_many :loanees, :through => :inventory_loans
   
-  has_many :report_entry_objects
-  has_many :report_entries, :through => :report_entry_objects
+  has_many :report_entry_objects 
+  has_many :report_entries, :through => :report_entry_objects do
+    def open?
+      proxy_association.owner.report_entries.each do |report|
+        return true if report.open_issue
+      end
+      return false
+    end
+  end
   
   validates :id1, :uniqueness => true, :presence => true
   validates :id2, :uniqueness => true, :allow_blank => true
