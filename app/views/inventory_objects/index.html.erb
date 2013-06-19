@@ -6,30 +6,23 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Version</th>
       <th><%= model_class.human_attribute_name(:id1) %></th>
       <th><%= model_class.human_attribute_name(:id2) %></th>
       <th><%= model_class.human_attribute_name(:id3) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @inventory_objects.each do |inventory_object| %>
       <tr>
-        <td><%= link_to inventory_object.id, inventory_object_path(inventory_object) %></td>
-        <td><%= inventory_object.id1 %></td>
+        <td><%= inventory_object.inventory_object_version.name %></td>
+        <td><%= link_to inventory_object.id1, inventory_object %></td>
         <td><%= inventory_object.id2 %></td>
         <td><%= inventory_object.id3 %></td>
-        <td><%=l inventory_object.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_inventory_object_path(inventory_object), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      inventory_object_path(inventory_object),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
     <% end %>

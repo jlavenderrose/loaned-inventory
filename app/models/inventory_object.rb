@@ -53,6 +53,8 @@ class InventoryObject < ActiveRecord::Base
     id1 'id1'
     id2 'id2'
     id3 'id3'
+    
+    status_tag_list 'Status Tags'
   end
   
   #CSV getters

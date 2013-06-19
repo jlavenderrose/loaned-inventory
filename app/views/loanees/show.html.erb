@@ -10,6 +10,16 @@
   <dd><%= @loanee.idnum %></dd>
 </dl>
 
+<h3>Inventory Objects:</h3>
+<ol>
+  <% @loanee.inventory_loans.each do |loan| %>
+    <li>
+      <%= link_to loan.inventory_object.id1, loan.loanee %> 
+      from <%= loan.loaned_date %> to <%= loan.returned_date or "Current" %>.
+    </li>
+  <% end %>
+</ol>
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               loanees_path, :class => 'btn'  %>

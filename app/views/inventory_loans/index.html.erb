@@ -6,9 +6,11 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>Loanee</th>
+      <th>Inventory Object</th>
       <th><%= model_class.human_attribute_name(:loaned_date) %></th>
       <th><%= model_class.human_attribute_name(:returned_date) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -16,17 +18,13 @@
     <% @inventory_loans.each do |inventory_loan| %>
       <tr>
         <td><%= link_to inventory_loan.id, inventory_loan_path(inventory_loan) %></td>
+        <td><%= link_to inventory_loan.loanee.fullname, inventory_loan.loanee %></td>
+        <td><%= link_to inventory_loan.inventory_object.id1, inventory_loan.inventory_object %></td>
         <td><%= inventory_loan.loaned_date %></td>
         <td><%= inventory_loan.returned_date %></td>
-        <td><%=l inventory_loan.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_inventory_loan_path(inventory_loan), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      inventory_loan_path(inventory_loan),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
     <% end %>

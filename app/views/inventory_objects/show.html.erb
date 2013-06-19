@@ -9,9 +9,9 @@
     <dt><strong><%= model_class.human_attribute_name(:id1) %>:</strong></dt>
     <dd><%= @inventory_object.id1 %></dd>
     <dt><strong><%= model_class.human_attribute_name(:id2) %>:</strong></dt>
-    <dd><%= @inventory_object.id2 %></dd>
+    <dd><%= @inventory_object.id2.present? ? @inventory_object.id2 : "N/A" %></dd>
     <dt><strong><%= model_class.human_attribute_name(:id3) %>:</strong></dt>
-    <dd><%= @inventory_object.id3 %></dd>
+    <dd><%= @inventory_object.id3.present? ? @inventory_object.id3 : "N/A"  %></dd>
     <dt>Type</dt>
     <dd><%= @inventory_object.inventory_object_version.inventory_object_type.name %></dd>
     <dt>Version</dt>

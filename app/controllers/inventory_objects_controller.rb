@@ -26,6 +26,11 @@ class InventoryObjectsController < ApplicationController
       format.json { 
         render :json => @inventory_objects
       }
+      #CSV support
+      format.csv {
+        render :csv => @inventory_objects,
+               :filename => "inventory_object_search_#{params[:q]}"
+      }
       end
   end
   
