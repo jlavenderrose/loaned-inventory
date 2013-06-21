@@ -45,7 +45,13 @@ class ReportEntriesController < ApplicationController
 
     respond_to do |format|
       if @report_entry.save
-        format.html { redirect_to @report_entry, notice: 'Report entry was successfully created.' }
+        format.html { 
+          if @report_entry.inventory_objects.count > 1 then
+            redirect_to @report_entry, notice: 'Report entry was successfully created.' 
+          else
+            redirect_to @report_entry.inventory_objects.first, notice: 'Report entry was successfully created.' 
+          end
+        }
         format.json { render json: @report_entry, status: :created, location: @report_entry }
       else
         format.html { render action: "new" }
