@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		if (signed_out?) then
+		if (current_user.nil?) then
 			flash[:info] = "You're not logged in!"
 			redirect_to root_path
 		else

@@ -73,7 +73,12 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; HighTech Los Angeles 2013</p>
+        <p><small>
+        <% unless current_user.nil? %>
+        Logged in as: <%= current_user.fullname %><br/>
+        <% end %>
+        &copy; HighTech Los Angeles 2013
+        </small></p>
       </footer>
 
     </div> <!-- /container -->
