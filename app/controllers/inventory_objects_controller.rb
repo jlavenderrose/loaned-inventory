@@ -29,7 +29,7 @@ class InventoryObjectsController < ApplicationController
       #CSV support
       format.csv {
         render :csv => @inventory_objects,
-               :filename => "inventory_object_search_#{params[:q]}"
+               :filename => "inventory_object_search_#{params[:q].gsub(/[^A-z0-9]/,'_')}"
       }
       end
   end
