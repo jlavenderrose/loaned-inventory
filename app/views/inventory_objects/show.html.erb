@@ -33,7 +33,7 @@
 
 <div class="span6">
   <h3>Reports:</h3>
-  <% (@inventory_object.report_entries.select{ |e| !e.new_record? }).each do |report| %>
+  <% (@inventory_object.report_entries.all(:order => 'created_at DESC').select{ |e| !e.new_record? }).each do |report| %>
     <%= render 'report_entries/show', :report => report %>
   <% end %>
   <div class="row-fluid">
