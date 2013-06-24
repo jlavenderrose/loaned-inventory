@@ -17,6 +17,15 @@ module FullTextQuery
       query = query_helper key, kv[key], query, query_array
     end
 	
-    on.where(query, *query_array)
+    r = on.where(query, *query_array)
+    
+    r.each do |e|
+		kv.keys.sort.each do |key|
+			if e[key] == kv[key] then
+				return [e]
+			end
+		end
+    end
+    return r
   end
 end
