@@ -11,6 +11,7 @@ class ReportEntry < ActiveRecord::Base
   
   has_many :report_entry_objects
   has_many :inventory_objects, :through => :report_entry_objects
+  has_many :report_entry_comments
   belongs_to :administrator
   
   def search query
@@ -19,6 +20,14 @@ class ReportEntry < ActiveRecord::Base
   
   def self.search query
 	self.new.search query
+  end
+  
+  def path_object
+	if inventory_objects.count > 1 then
+		self
+	else
+		self.inventory_objects.first
+	end
   end
   
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130614163039) do
+ActiveRecord::Schema.define(:version => 20130625053953) do
 
   create_table "administrators", :force => true do |t|
     t.string   "fullname"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20130614163039) do
     t.integer  "administrator_id"
     t.integer  "inventory_object_id"
     t.boolean  "open_issue"
+  end
+
+  create_table "report_entry_comments", :force => true do |t|
+    t.text     "body"
+    t.integer  "administrator_id"
+    t.integer  "report_entry_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "report_entry_objects", :force => true do |t|

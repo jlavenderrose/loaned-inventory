@@ -10,6 +10,7 @@ class Administrator < ActiveRecord::Base
   validates :password_confirmation, :presence => true
 
   has_many :report_entries
+  has_many :report_entry_comments
   
   private
   def create_remember_token

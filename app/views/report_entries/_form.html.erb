@@ -3,8 +3,8 @@
     <%= f.input :administrator_id, :as => :hidden %>
     <%= f.input :inventory_object_tokens,
                 :input_html => {"data-pre" => @report_entry.inventory_objects.to_json} %>
-    <%= f.input :body, :input_html => { :rows => 5 }%>
+    <%= f.input :body, :input_html => { :rows => 5 }, label: 'Comment' %>
     <%= f.input :open_issue %>
   <% end %>
-  <%= f.actions %>
+  <%= f.action :submit %>
 <% end %>

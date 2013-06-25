@@ -14,5 +14,11 @@
     <% end %>
     <%= objects.join(',').html_safe %>
   </h6></p>
+  <h6>Comments:</h6>
+	  <% (report.report_entry_comments.all(:order => 'created_at DESC').select{ |e| !e.new_record? }).each do |comment| %>
+		<%= render 'report_entry_comments/show', :report_entry_comment => comment %>
+	  <% end %>
+	  <% comment = report.report_entry_comments.new; comment.administrator = current_user %>
+	  <%= render 'report_entry_comments/form', :report_entry_comment => comment %>
 </div>
 

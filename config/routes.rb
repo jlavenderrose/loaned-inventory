@@ -1,5 +1,6 @@
 LoanedInventory::Application.routes.draw do
   resources :report_entries
+  resources :report_entry_comments
 
   resources :audit_log_entries
 
