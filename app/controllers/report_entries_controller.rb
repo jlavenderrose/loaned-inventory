@@ -2,7 +2,11 @@ class ReportEntriesController < ApplicationController
   # GET /report_entries
   # GET /report_entries.json
   def index
-    @report_entries = ReportEntry.all
+	unless params[:q].nil?
+		@report_entries = ReportEntry.search params[:q]
+	else
+		@report_entries = []
+	end
 
     respond_to do |format|
       format.html # index.html.erb

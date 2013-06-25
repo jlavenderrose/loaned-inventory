@@ -1,5 +1,6 @@
 class ReportEntry < ActiveRecord::Base
   include InventoryObjectTokenInputtable
+  include FullTextQuery
 
   attr_accessible :body, :open_issue, 
                   :administrator_id
@@ -11,6 +12,14 @@ class ReportEntry < ActiveRecord::Base
   has_many :report_entry_objects
   has_many :inventory_objects, :through => :report_entry_objects
   belongs_to :administrator
+  
+  def search query
+	like_query ReportEntry, {:body => query}
+  end
+  
+  def self.search query
+	self.new.search query
+  end
   
   private
   def inventory_objects_associated
