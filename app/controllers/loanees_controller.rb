@@ -4,7 +4,11 @@ class LoaneesController < ApplicationController
   # GET /loanees
   # GET /loanees.json
   def index
-    @loanees = Loanee.new.search(params[:q]) if params[:q]
+	if params[:q] then
+		@loanees = Loanee.search(params[:q]) if params[:q]
+	else
+		@loanees = []
+	end
 
     respond_to do |format|
       format.html {

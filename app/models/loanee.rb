@@ -17,6 +17,10 @@ class Loanee < ActiveRecord::Base
     end
   end
   
+  def self.search query
+	self.new.search query
+  end
+  
   def as_json options=nil
     {
       id: self.id,
