@@ -28,6 +28,10 @@ class InventoryObject < ActiveRecord::Base
   validates_associated :inventory_object_version
   validates_presence_of :inventory_object_version_id
   
+  def human_name
+    "#{self.inventory_object_version.name}: #{self.id1}"
+  end
+  
   def search(query)
     @res = like_query InventoryObject, {:id1 => query, :id2 => query, :id3 => query}
     if @res.length == 1 then

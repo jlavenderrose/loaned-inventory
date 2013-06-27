@@ -73,10 +73,22 @@ class InventoryLoansController < ApplicationController
   # DELETE /inventory_loans/1.json
   def destroy
     @inventory_loan = InventoryLoan.find(params[:id])
-    @inventory_loan.destroy
+    #@inventory_loan.destroy don't do this
+    if @inventory_loan.current? then
+      @inventory_loan.returned_date = Date.today
+      @inventory_loan.save
+    end
+    
 
     respond_to do |format|
-      format.html { redirect_to inventory_loans_url }
+      format.html { 
+        if params[:lookup].present? then
+          redirect_to point_of_sale_lookup_path(:loanee => {:loanee_token => @inventory_loan.loanee.id}),
+            notice: @inventory_loan.current? ? "Loan closed" : nil
+        else
+          redirect_to inventory_loans_url 
+        end
+      }
       format.json { head :no_content }
     end
   end
