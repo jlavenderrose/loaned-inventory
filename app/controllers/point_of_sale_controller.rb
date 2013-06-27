@@ -1,5 +1,5 @@
 class PointOfSaleController < ApplicationController
-  
+  autocomplete :loanee, :total_id
   
   def create
     @inventory_object = InventoryObject.new
@@ -31,5 +31,14 @@ class PointOfSaleController < ApplicationController
     @inventory_object = InventoryObject.new(params[:inventory_object])
     @inventory_object.id1 = nil
     render 'tag'
+  end
+  
+  def lookup
+	if params[:loanee] then
+		@loanee = Loanee.find(params[:loanee][:loanee_token])
+	else
+		#render form
+		@loanee = Loanee.new
+	end
   end
 end

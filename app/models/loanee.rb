@@ -1,5 +1,6 @@
 class Loanee < ActiveRecord::Base
   include FullTextQuery
+  include LoaneeTokenInputtable
 
   attr_accessible :fullname, :idnum
 
@@ -20,7 +21,7 @@ class Loanee < ActiveRecord::Base
   def self.search query
 	self.new.search query
   end
-  
+
   def as_json options=nil
     {
       id: self.id,

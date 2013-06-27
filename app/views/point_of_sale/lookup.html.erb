@@ -1,0 +1,5 @@
+<%= semantic_form_for @loanee, url: point_of_sale_lookup_path, html: {class: "auto-form"} do |f| %>
+	<%= f.input :loanee_token,
+      :input_html => {"data-pre" => [@loanee].to_json} %>
+    <%= f.actions %>
+<% end %>

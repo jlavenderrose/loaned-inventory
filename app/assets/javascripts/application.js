@@ -23,5 +23,5 @@ $(function () {
   $('[id$="inventory_object_tokens"]').tokenInput('/inventory_objects.json', tokens);
   $('[id$="loanee_tokens"]').tokenInput('/loanees.json', tokens);
   $('[id$="inventory_object_token"]').tokenInput('/inventory_objects.json', token);
-  $('[id$="loanee_token"]').tokenInput('/loanees.json', token);
+  $('form:not(.auto-form) [id$="loanee_token"]').tokenInput('/loanees.json', token);
 });
