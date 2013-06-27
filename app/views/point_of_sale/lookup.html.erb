@@ -8,7 +8,7 @@
         <% if inventory_loan.current? then %>
           <%= semantic_form_for inventory_loan, html: {:method => :delete} do |loan_f| %>
             <%= hidden_field_tag "lookup", "1" %>
-            <%= loan_f.action :submit, label: "Close" %>
+            <%= loan_f.action :submit, label: "Close", button_html: {class: "btn btn-mini"} %>
           <% end %>  
         <% end %>
     </li>

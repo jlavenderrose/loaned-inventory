@@ -48,6 +48,7 @@ gem 'nifty-generators'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-tokeninput-rails'
+gem 'jquery-hotkeys-rails'
 gem 'acts-as-taggable-on'
 gem 'rails3-jquery-autocomplete'
 
