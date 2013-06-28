@@ -1,6 +1,7 @@
 require 'csv'
 
 class InventoryObjectsController < ApplicationController
+  include FullTextQuery
   #tagging autocompletion
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   
@@ -8,12 +9,48 @@ class InventoryObjectsController < ApplicationController
   # GET /inventory_objects.json
   def index
     @inventory_objects = []
-    if params[:q] then
+    @search = {versionid: 0}
+    filename = "blank"
+    if params[:q].present? then
       @inventory_objects = array_wrap InventoryObject.new.search(params[:q])
       @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q].downcase)
+      
+      @search = {idnum: params[:q]}
+      filename = params[:q].gsub(/[^A-z0-9]/,'_')
+    end
+    
+    if params[:search] then
+		unless params[:search][:versionid].to_i == 0 then
+			logger.debug "Adv. Search: By InventoryObjectVersion"
+			version = InventoryObjectVersion.find(params[:search][:versionid]) if params[:search][:versionid]
+			base = version.objects if version
+			base = InventoryObject unless base
+		else
+			logger.debug "Adv. Search: By ALL"
+			base = InventoryObject
+		end
+		
+		logger.debug "Selecting by tag" if params[:search][:tags].present?
+		base = base.tagged_with(params[:search][:tags].split ", ") if params[:search][:tags].present?
+		
+		if params[:search][:idnum].present? then
+			logger.debug "Selecting by idnum"
+			base = like_query(base, {'id1' => params[:search][:idnum],
+									 'id2' => params[:search][:idnum],
+									 'id3' => params[:search][:idnum]})
+		end
+										
+		if base.respond_to? "all" then
+			@inventory_objects = base.all 
+		else
+			@inventory_objects = base
+		end
+		
+		@search = params[:search]
+		"#{params[:search][:idnum]} #{params[:search][:version_id]} #{params[:search][:tags]}".gsub(/[^A-z0-9]/,'_')
     end
 
-    
+    logger.debug @search
     respond_to do |format|
       format.html {
         if @inventory_objects.count == 1 then
@@ -29,7 +66,7 @@ class InventoryObjectsController < ApplicationController
       #CSV support
       format.csv {
         render :csv => @inventory_objects,
-               :filename => "inventory_object_search_#{params[:q].gsub(/[^A-z0-9]/,'_')}"
+               :filename => "inventory_object_search_#{filename}"
       }
       end
   end

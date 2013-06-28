@@ -1,4 +1,6 @@
 class InventoryObjectVersion < ActiveRecord::Base
+  scope :type_sorted, order('inventory_object_type_id')
+
   attr_accessible :name, :inventory_object_type_name, :inventory_object_type_id
   
   def inventory_object_type_name

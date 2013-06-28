@@ -2,18 +2,15 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<div class="row">
-<%= semantic_form_for @inventory_object, method: "get" do |f| %>
-  <%= f.input :inventory_object_version %>
-  <%= text_field_tag :search, :tags %>
-  <%= text_field_tag :search, :id %>
+<%= form_tag inventory_objects_path, method: "get" do %>
+	<%= text_field_tag "search[idnum]", @search[:idnum], placeholder: "InventoryObject ID"%>
+	<%= text_field_tag "search[tags]", @search[:tags], placeholder: "InventoryObject Tags" %>
+	<%= select_tag 'search[versionid]', "<option value='0'>All</option>".html_safe+options_from_collection_for_select(InventoryObjectVersion.type_sorted.all, 'id', 'name', @search[:versionid]) %>
+	<%= submit_tag 'Search', class: "btn btn-small" %>
 <% end %>
-<form class="navbar-search pull-left" action="<%= inventory_objects_path %>" method="get">
-        <input type="text" class="search-query span2" name="q" placeholder="Inventory Search">
-</form>
-</div>
 <% if @inventory_objects %>
 <table class="table table-striped">
+  <caption><h4>Inventory Object Search Count: <%= @inventory_objects.count %></h4></caption>
   <thead>
     <tr>
       <th>Version</th>
