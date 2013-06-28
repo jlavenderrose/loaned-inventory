@@ -10,12 +10,13 @@ class InventoryObjectsController < ApplicationController
   def index
     @inventory_objects = []
     @search = {versionid: 0}
-    
+    filename = "blank"
     if params[:q].present? then
       @inventory_objects = array_wrap InventoryObject.new.search(params[:q])
       @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q].downcase)
       
       @search = {idnum: params[:q]}
+      filename = params[:q].gsub(/[^A-z0-9]/,'_')
     end
     
     if params[:search] then
@@ -46,6 +47,7 @@ class InventoryObjectsController < ApplicationController
 		end
 		
 		@search = params[:search]
+		"#{params[:search][:idnum]} #{params[:search][:version_id]} #{params[:search][:tags]}".gsub(/[^A-z0-9]/,'_')
     end
 
     logger.debug @search
@@ -64,7 +66,7 @@ class InventoryObjectsController < ApplicationController
       #CSV support
       format.csv {
         render :csv => @inventory_objects,
-               :filename => "inventory_object_search_#{params[:q].gsub(/[^A-z0-9]/,'_')}"
+               :filename => "inventory_object_search_#{filename}"
       }
       end
   end
