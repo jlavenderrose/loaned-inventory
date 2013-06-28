@@ -16,10 +16,10 @@ $(function() {
 		onResult: function (results) {
 			if (!$('form.auto-form [id$="loanee_token"]').is(":focus")) {
 				//if we don't have focus then we've been tabbed by, set value to first object
-				
 				//I present, the world's dumbest jQuery selector
 				$($('form.auto-form [id$="loanee_token"]')[1]).tokenInput("add", results[0])
 			}
+      return results
 		}
 	})
 })

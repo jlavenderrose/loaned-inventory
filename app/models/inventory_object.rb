@@ -32,13 +32,18 @@ class InventoryObject < ActiveRecord::Base
     "#{self.inventory_object_version.name}: #{self.id1}"
   end
   
-  def search(query)
-    @res = like_query InventoryObject, {:id1 => query, :id2 => query, :id3 => query}
+  def search(query, scope=nil)
+    scope = scope || InventoryObject
+    @res = like_query scope, {:id1 => query, :id2 => query, :id3 => query}
     if @res.length == 1 then
       @res.first
     else
       @res
     end
+  end
+  
+  def self.search query, scope=nil
+    InventoryObject.new.search query, scope
   end
   
   #jQuery.tokenInput support
