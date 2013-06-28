@@ -18,6 +18,6 @@
   
 <%= semantic_form_for @loanee, url: point_of_sale_lookup_path, html: {:method => :post, class: "auto-form"} do |f| %>
 	<%= f.input :loanee_token,
-      :input_html => {"data-pre" => @loanee.new_record? ? nil : [@loanee].to_json} %>
+      :input_html => {"data-pre" => @loanee.new_record? ? nil : [@loanee].to_json, class: "first"} %>
   <%= f.action :submit, label: "Lookup Loanee" %>
 <% end %>

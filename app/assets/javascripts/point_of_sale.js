@@ -1,12 +1,5 @@
 //code to make scanner use easier
 $(function() {
-  //auto focus first field
-  $("input.first").focus()
-  //submit form on last field defocus (scanner sends tab after data)
-  $("input.last").blur(function() {
-    $("form.auto-form").delay(100).submit();
-  })
-  
   $('form.auto-form [id$="loanee_token"]').tokenInput('/loanees.json',
 		{ crossDomain: false,
 		preventDuplicates: true,
@@ -20,6 +13,16 @@ $(function() {
 				$($('form.auto-form [id$="loanee_token"]')[1]).tokenInput("add", results[0])
 			}
       return results
-		}
+		},
+    onReady: function () {
+      $('form.auto-form [id$="loanee_token"]').focus();
+    }
 	})
+  
+  //auto focus first field
+  $("input.first").focus()
+  //submit form on last field defocus (scanner sends tab after data)
+  $("input.last").blur(function() {
+    $("form.auto-form").delay(100).submit();
+  })
 })
