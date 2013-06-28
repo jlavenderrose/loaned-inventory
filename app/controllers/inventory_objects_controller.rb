@@ -9,12 +9,15 @@ class InventoryObjectsController < ApplicationController
   # GET /inventory_objects.json
   def index
     @inventory_objects = []
-    if params[:q] then
+    @search = {versionid: 0}
+    
+    if params[:q].present? then
       @inventory_objects = array_wrap InventoryObject.new.search(params[:q])
       @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q].downcase)
+      
+      @search = {idnum: params[:q]}
     end
     
-    @search = {versionid: 0}
     if params[:search] then
 		unless params[:search][:versionid].to_i == 0 then
 			logger.debug "Adv. Search: By InventoryObjectVersion"
