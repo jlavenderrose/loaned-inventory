@@ -1,6 +1,7 @@
 require 'csv'
 
 class InventoryObjectsController < ApplicationController
+  include FullTextQuery
   #tagging autocompletion
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   
@@ -12,8 +13,39 @@ class InventoryObjectsController < ApplicationController
       @inventory_objects = array_wrap InventoryObject.new.search(params[:q])
       @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q].downcase)
     end
-
     
+    @search = {versionid: 0}
+    if params[:search] then
+		unless params[:search][:versionid].to_i == 0 then
+			logger.debug "Adv. Search: By InventoryObjectVersion"
+			version = InventoryObjectVersion.find(params[:search][:versionid]) if params[:search][:versionid]
+			base = version.objects if version
+			base = InventoryObject unless base
+		else
+			logger.debug "Adv. Search: By ALL"
+			base = InventoryObject
+		end
+		
+		logger.debug "Selecting by tag" if params[:search][:tags].present?
+		base = base.tagged_with(params[:search][:tags].split ", ") if params[:search][:tags].present?
+		
+		if params[:search][:idnum].present? then
+			logger.debug "Selecting by idnum"
+			base = like_query(base, {'id1' => params[:search][:idnum],
+									 'id2' => params[:search][:idnum],
+									 'id3' => params[:search][:idnum]})
+		end
+										
+		if base.respond_to? "all" then
+			@inventory_objects = base.all 
+		else
+			@inventory_objects = base
+		end
+		
+		@search = params[:search]
+    end
+
+    logger.debug @search
     respond_to do |format|
       format.html {
         if @inventory_objects.count == 1 then
