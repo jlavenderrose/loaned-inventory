@@ -24,4 +24,11 @@ $(function () {
   $('[id$="loanee_tokens"]').tokenInput('/loanees.json', tokens);
   $('[id$="inventory_object_token"]').tokenInput('/inventory_objects.json', token);
   $('form:not(.auto-form) [id$="loanee_token"]').tokenInput('/loanees.json', token);
+  
+  $('#pos_token').tokenInput('/point_of_sale/search', {
+		tokenValue: 'tid',
+		preventDuplicates: true,
+		tokenLimit: 1,
+		theme: 'facebook'
+  })
 });

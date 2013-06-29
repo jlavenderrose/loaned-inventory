@@ -41,4 +41,44 @@ class PointOfSaleController < ApplicationController
 		@loanee = Loanee.new
 	end
   end
+  
+  def search
+	if params[:q] then
+		loanees = array_wrap Loanee.search(params[:q])
+		objects = array_wrap InventoryObject.search(params[:q])
+		@results = loanees + objects
+	else
+		@results = []
+	end
+	
+	respond_to do |format|
+		format.json {
+			render json: @results
+		}
+	end
+  end
+  
+  def find
+	begin
+		if params[:pos_token].include? "l" then
+			loanee = Loanee.find(params[:pos_token].gsub(/[A-z]/,'').to_i)
+			redirect_to loanee
+		elsif params[:pos_token].include? "o" then
+			inventory_object = InventoryObject.find(params[:pos_token].gsub(/[A-z]/,'').to_i)
+			redirect_to inventory_object
+		else
+			redirect_to root_path, notice: "No such record was located"
+		end
+	rescue RecordNotFound
+		redirect_to root_path, notice: "No such record was located"
+	end
+  end
+  
+  def array_wrap (obj)
+    if obj.respond_to?('count')
+      obj
+    else
+      [obj]
+    end
+  end
 end

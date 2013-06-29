@@ -50,6 +50,7 @@ class InventoryObject < ActiveRecord::Base
   def as_json options=nil
     {
       id: self.id,
+      tid: "o#{self.id}",
       name: [self.id1, self.id2, self.id3].join(' ')
     }
   end

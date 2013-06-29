@@ -25,6 +25,7 @@ class Loanee < ActiveRecord::Base
   def as_json options=nil
     {
       id: self.id,
+      tid: "l#{self.id}",
       name: self.fullname
     }
   end
