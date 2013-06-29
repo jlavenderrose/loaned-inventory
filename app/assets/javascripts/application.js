@@ -29,6 +29,19 @@ $(function () {
 		tokenValue: 'tid',
 		preventDuplicates: true,
 		tokenLimit: 1,
-		theme: 'facebook'
+		theme: 'facebook',
+		hintText: 'POS Lookup',
+		
+		onResult: function(results) {
+			if (!$("#pos_token").is(":focus")) {
+				$("#pos_token").tokenInput("add", results[0])
+				$("#pos_form").submit()
+			}
+			return results
+		},
+		
+		onReady: function() {
+			$("#token-input-pos_token").focus()
+		}
   })
 });

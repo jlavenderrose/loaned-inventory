@@ -75,9 +75,8 @@
     <div class="container-fluid">
         <div class="span12">
           <%= bootstrap_flash %>
-          <%= form_tag point_of_sale_search_path, method: 'post', class: 'form-inline' do %>
+          <%= form_tag point_of_sale_search_path, method: 'post', class: 'form-inline', id: 'pos_form' do %>
 			<%= text_field_tag 'pos_token', nil, placeholder: 'POS Lookup' %>
-			<%= submit_tag 'Lookup', class: 'btn btn-small'  %>
           <% end %>
           <%= yield %>
         </div>
