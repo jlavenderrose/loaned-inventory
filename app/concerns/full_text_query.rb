@@ -26,8 +26,10 @@ module FullTextQuery
     
     r.each do |e|
 		kv.keys.sort.each do |key|
-			if e[key].downcase == kv[key].downcase then
-				return [e]
+			if e[key].present? then
+				if e[key].downcase == kv[key].downcase then
+					return [e]
+				end
 			end
 		end
     end
