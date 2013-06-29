@@ -44,4 +44,6 @@ $(function () {
 			$("#token-input-pos_token").focus()
 		}
   })
+  
+  $(document).bind('keyup', 'alt+a', function() { $("#token-input-pos_token").focus() })
 });
