@@ -16,7 +16,7 @@ class InventoryLoan < ActiveRecord::Base
   validate :only_current_loan, :on => :create
   
   #default values
-  after_initialize :init
+  before_save :init
   #before_validation :init
   
   #name accessors/getters
@@ -59,6 +59,6 @@ class InventoryLoan < ActiveRecord::Base
   end
   
   def init
-	self.loaned_date = Date.today
+	self.loaned_date ||= Date.today
   end
 end
