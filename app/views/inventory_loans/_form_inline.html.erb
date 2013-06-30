@@ -1,0 +1,9 @@
+Loaned <%= link_to inventory_loan.inventory_object.human_name, inventory_loan.inventory_object %>
+to <%= link_to inventory_loan.loanee.fullname, inventory_loan.loanee %> from
+<%= inventory_loan.loaned_date %> to <%= inventory_loan.returned_date or "Current" %>
+<% if inventory_loan.current? then %>
+  <%= semantic_form_for inventory_loan, html: {:method => :delete} do |loan_f| %>
+	<%= hidden_field_tag "lookup", "1" %>
+	<%= loan_f.action :submit, label: "Close", button_html: {class: "btn btn-mini"} %>
+  <% end %>  
+<% end %>

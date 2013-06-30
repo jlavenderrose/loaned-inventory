@@ -1,0 +1,18 @@
+<%= semantic_form_for inventory_loan do |f| %>
+  <%= f.inputs do %>
+	<% unless hidden and inventory_loan.inventory_object then %>
+		<%= f.input :inventory_object_token,
+			:input_html => {"data-pre" => inventory_loan.inventory_object.to_json} %>
+    <% else %>
+		<%= f.input :inventory_object_id, :as => :hidden %>
+    <% end %>
+    <% unless hidden and inventory_loan.loanee then %>
+		<%= f.input :loanee_token,
+		  :input_html => {"data-pre" => inventory_loan.loanee.to_json} %>
+		<%= f.input :loaned_date %>
+    <% else %>
+		<%= f.input :loanee_id, :as => :hidden %>
+    <% end %>
+  <% end %>
+  <%= f.actions %>
+<% end %>
