@@ -29,7 +29,7 @@ class InventoryObject < ActiveRecord::Base
   validates_presence_of :inventory_object_version_id
   
   def human_name
-    "#{self.inventory_object_version.name}: #{self.id1}"
+    "#{self.inventory_object_version.name}: #{self.id1} #{self.id2} #{self.id3}"
   end
   
   def search(query, scope=nil)
@@ -51,7 +51,7 @@ class InventoryObject < ActiveRecord::Base
     {
       id: self.id,
       tid: "o#{self.id}",
-      name: [self.id1, self.id2, self.id3].join(' ')
+      name: self.human_name
     }
   end
 
