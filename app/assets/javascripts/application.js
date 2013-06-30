@@ -33,7 +33,7 @@ $(function () {
 		hintText: 'POS Lookup',
 		
 		onResult: function(results) {
-			if (!$("#pos_token").is(":focus")) {
+			if (!$("#token-input-pos_token").is(":focus")) {
 				$("#pos_token").tokenInput("add", results[0])
 				$("#pos_form").submit()
 			}
@@ -45,5 +45,11 @@ $(function () {
 		}
   })
   
-  $(document).bind('keyup', 'alt+a', function() { $("#token-input-pos_token").focus() })
+  $(document).bind('keypress', '`', function(event) { 
+	if (!$("input").is(":focus")) {
+		$("#token-input-pos_token").focus() 
+		return false
+	}
+	return true
+  })
 });
