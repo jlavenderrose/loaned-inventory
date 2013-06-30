@@ -14,6 +14,7 @@
 //= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery.tokeninput
+//= require jquery-hotkeys
 //= require autocomplete-rails
 //= require twitter/bootstrap
 //= require_tree .
@@ -40,16 +41,16 @@ $(function () {
 			return results
 		},
 		
+		onAdd: function() {
+			$("#pos_form").submit()
+		},
+		
 		onReady: function() {
 			$("#token-input-pos_token").focus()
 		}
   })
   
-  $(document).bind('keypress', '`', function(event) { 
-	if (!$("input").is(":focus")) {
-		$("#token-input-pos_token").focus() 
-		return false
-	}
-	return true
-  })
+  $(document).bind('keyup', 'alt+a', function(e) {
+		$("#token-input-pos_token").focus()
+	})
 });
