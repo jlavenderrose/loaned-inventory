@@ -20,7 +20,10 @@ class InventoryLoansControllerTest < ActionController::TestCase
 
   test "should create inventory_loan" do
     assert_difference('InventoryLoan.count') do
-      post :create, inventory_loan: { loaned_date: @inventory_loan.loaned_date, returned_date: @inventory_loan.returned_date }
+      post :create, inventory_loan: { loaned_date: @inventory_loan.loaned_date,
+									  returned_date: @inventory_loan.returned_date,
+									  loanee_id: loanees(:one).id,
+									  inventory_object_id: inventory_objects(:two).id }
     end
 
     assert_redirected_to inventory_loan_path(assigns(:inventory_loan))
@@ -42,9 +45,11 @@ class InventoryLoansControllerTest < ActionController::TestCase
   end
 
   test "should destroy inventory_loan" do
-    assert_difference('InventoryLoan.count', -1) do
-      delete :destroy, id: @inventory_loan
-    end
+    #assert_difference('InventoryLoan.count', -1) do
+      #delete :destroy, id: @inventory_loan
+    #end
+    delete :destroy, id: @inventory_loan
+    assert_equal(assigns(:inventory_loan).returned_date, Date.today)
 
     assert_redirected_to inventory_loans_path
   end

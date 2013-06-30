@@ -19,7 +19,10 @@ class InventoryObjectsControllerTest < ActionController::TestCase
 
   test "should create inventory_object" do
     assert_difference('InventoryObject.count') do
-      post :create, inventory_object: { id1: @inventory_object.id1, id2: @inventory_object.id2, id3: @inventory_object.id3 }
+      post :create, inventory_object: { id1: @inventory_object.id1+"B", 
+										id2: @inventory_object.id2+"B", 
+										id3: @inventory_object.id3+"B",
+										inventory_object_version_id: inventory_object_versions(:one) }
     end
 
     assert_redirected_to inventory_object_path(assigns(:inventory_object))

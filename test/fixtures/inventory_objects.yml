@@ -5,3 +5,9 @@ one:
   id2: MyString
   id3: MyString
   inventory_object_version: "one"
+  
+two:
+  id1: MyStringA
+  id2: MyStringA
+  id3: MyStringA
+  inventory_object_version: "one"

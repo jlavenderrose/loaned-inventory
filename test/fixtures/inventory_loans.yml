@@ -2,6 +2,6 @@
 
 one:
   loaned_date: 2013-06-10
-  returned_date: <%= Date.today %>
+  returned_date:
   loanee: "one"
   inventory_object: "one"

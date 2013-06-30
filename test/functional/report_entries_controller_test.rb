@@ -19,11 +19,16 @@ class ReportEntriesControllerTest < ActionController::TestCase
 
   test "should create report_entry" do
     assert_difference('ReportEntry.count') do
-      post :create, report_entry: { body: @report_entry.body }
+      post :create, report_entry: { body: @report_entry.body, 
+									administrator_id: administrators(:one),
+									inventory_object_tokens: inventory_objects(:one).id }
     end
 
-    assert_redirected_to report_entry_path(assigns(:report_entry))
+	#redirects to object if only a single object is associated
+    assert_redirected_to inventory_object_path(assigns(:report_entry).inventory_objects.first)
   end
+  
+  #TODO: should create report_entry with multiple associated inventory objects
 
   test "should show report_entry" do
     get :show, id: @report_entry

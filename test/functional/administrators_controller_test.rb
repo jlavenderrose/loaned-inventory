@@ -22,7 +22,10 @@ class AdministratorsControllerTest < ActionController::TestCase
 
   test "should create administrator" do
     assert_difference('Administrator.count') do
-      post :create, administrator: { fullname: @administrator.fullname }
+      post :create, administrator: { username: @administrator.username+"B",
+									 fullname: @administrator.fullname+"B",
+									 password: "B",
+									 password_confirmation: "B"}
     end
 
     assert_redirected_to administrator_path(assigns(:administrator))
@@ -39,7 +42,9 @@ class AdministratorsControllerTest < ActionController::TestCase
   end
 
   test "should update administrator" do
-    put :update, id: @administrator, administrator: { fullname: @administrator.fullname }
+    put :update, id: @administrator, administrator: { fullname: @administrator.fullname,
+													  password: 'b',
+													  password_confirmation: 'b'}
     assert_redirected_to administrator_path(assigns(:administrator))
   end
 

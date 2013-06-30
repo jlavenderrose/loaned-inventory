@@ -19,7 +19,8 @@ class InventoryObjectVersionsControllerTest < ActionController::TestCase
 
   test "should create inventory_object_version" do
     assert_difference('InventoryObjectVersion.count') do
-      post :create, inventory_object_version: { name: @inventory_object_version.name }
+      post :create, inventory_object_version: { name: @inventory_object_version.name+"B",
+												inventory_object_type_id: inventory_object_types(:one).id}
     end
 
     assert_redirected_to inventory_object_version_path(assigns(:inventory_object_version))
