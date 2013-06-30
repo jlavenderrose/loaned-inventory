@@ -3,7 +3,3 @@
 one:
   fullname: MyString
   idnum: MyString
-
-two:
-  fullname: MyString
-  idnum: MyString

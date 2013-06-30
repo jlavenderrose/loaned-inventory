@@ -2,10 +2,5 @@
 
 one:
   body: MyText
-  administrator_id: 1
-  report_entry_id: 1
-
-two:
-  body: MyText
-  administrator_id: 1
-  report_entry_id: 1
+  administrator: "one"
+  report_entry: "one"

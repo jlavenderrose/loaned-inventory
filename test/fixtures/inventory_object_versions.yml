@@ -1,9 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  id: 1
   name: MyString
-  inventory_object_type_id: 1
-
-two:
-  name: MyString
+  inventory_object_type: "one"
+  
