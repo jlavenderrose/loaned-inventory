@@ -16,7 +16,7 @@ class InventoryLoan < ActiveRecord::Base
   validate :only_current_loan, :on => :create
   
   #default values
-  before_save :init
+  after_initialize :init
   #before_validation :init
   
   #name accessors/getters
