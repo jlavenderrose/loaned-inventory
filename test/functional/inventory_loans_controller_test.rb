@@ -21,12 +21,36 @@ class InventoryLoansControllerTest < ActionController::TestCase
   test "should create inventory_loan" do
     assert_difference('InventoryLoan.count') do
       post :create, inventory_loan: { loaned_date: @inventory_loan.loaned_date,
-									  returned_date: @inventory_loan.returned_date,
+									  returned_date: Date.today,
 									  loanee_id: loanees(:one).id,
 									  inventory_object_id: inventory_objects(:two).id }
     end
 
     assert_redirected_to inventory_loan_path(assigns(:inventory_loan))
+  end
+  
+  test "should create inventory_loan redirect to loanee" do
+	assert_difference('InventoryLoan.count') do
+      post :create, inventory_loan: { loaned_date: @inventory_loan.loaned_date,
+									  returned_date: Date.today,
+									  loanee_id: loanees(:one).id,
+									  inventory_object_id: inventory_objects(:two).id },
+				    loanee: true
+	end
+	
+	assert_redirected_to loanee_path(assigns(:inventory_loan).loanee)
+  end
+  
+  test "should create inventory_loan redirect to object" do
+	assert_difference('InventoryLoan.count') do
+      post :create, inventory_loan: { loaned_date: @inventory_loan.loaned_date,
+									  returned_date: Date.today,
+									  loanee_id: loanees(:one).id,
+									  inventory_object_id: inventory_objects(:two).id },
+				    loanee: true
+	end
+	
+	assert_redirected_to loanee_path(assigns(:inventory_loan).inventory_object)
   end
 
   test "should show inventory_loan" do
