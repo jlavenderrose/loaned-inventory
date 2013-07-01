@@ -44,7 +44,19 @@ class InventoryLoansController < ApplicationController
   
     respond_to do |format|
       if @inventory_loan.save
-        format.html { redirect_to @inventory_loan, notice: 'Inventory loan was successfully created.' }
+        format.html {
+			if params[:inventory_loan][:loanee_token] or params[:inventory_loan][:inventory_object_token] then
+				if params[:inventory_loan][:loanee_id] then
+					redirect_to @inventory_loan.loanee, notice: 'Inventory loan was successfully created.' 
+				elsif params[:inventory_loan][:inventory_object_id] then
+					redirect_to @inventory_loan.inventory_object, notice: 'Inventory loan was successfully created.' 
+				else
+					redirect_to @inventory_loan, notice: 'Inventory loan was successfully created.' 
+				end
+			else
+				redirect_to @inventory_loan, notice: 'Inventory loan was successfully created.' 
+			end
+		}
         format.json { render json: @inventory_loan, status: :created, location: @inventory_loan }
       else
         format.html { render action: "new" }
