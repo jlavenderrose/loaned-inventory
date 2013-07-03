@@ -26,6 +26,10 @@ $(function () {
   $('[id$="inventory_object_token"]').tokenInput('/inventory_objects.json', token);
   $('form:not(.auto-form) [id$="loanee_token"]').tokenInput('/loanees.json', token);
   
+  function point_of_sale() {
+		return $("input.first").length
+  }
+  
   $('#pos_token').tokenInput('/point_of_sale/search', {
 		tokenValue: 'tid',
 		preventDuplicates: true,
@@ -46,11 +50,16 @@ $(function () {
 		},
 		
 		onReady: function() {
-			$("#token-input-pos_token").focus()
+			if (!point_of_sale()) {
+				console.log("POS lookup ready, grabbing focus")
+				$("#token-input-pos_token").focus()
+			} else {
+				console.log("disabling auto-focus on POS page")
+			}
 		}
   })
   
   $(document).bind('keyup', 'alt+a', function(e) {
 		$("#token-input-pos_token").focus()
-	})
+  })
 });
