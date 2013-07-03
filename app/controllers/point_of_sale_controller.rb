@@ -7,6 +7,7 @@ class PointOfSaleController < ApplicationController
   end
   
   def tag
+	@point_of_sale = true
     @session_params = params[:pos_session]
     @session_params = {id2: false, id3: false, first: true} if @session_params.nil?
     logger.debug @session_params.to_yaml
