@@ -4,7 +4,7 @@
       <%= f.input :inventory_object_version, :as => :select, 
         :collection => @inventory_object.inventory_object_version.inventory_object_type.versions.all %>
     <% else %>
-      <%= f.input :inventory_object_version, :as => :select %>
+      <%= f.input :inventory_object_version, :as => :select, :collection => InventoryObjectVersion.type_sort.all %>
     <% end %>
 		<%= f.input :id1 %>
 		<%= f.input :id2 %>
