@@ -1,10 +1,23 @@
-<%= form_tag(point_of_sale_create_path, :method => "post") do %>
+<%= semantic_form_for @inventory_object, url: point_of_sale_create_path, :html => {class: "auto-form"} do |f| %>
+  <%= f.input :inventory_object_version %>
   ID2?:
   <%= check_box_tag("pos_session[id2]", "1", @session_params[:id2]) %>
   ID3?:
   <%= check_box_tag("pos_session[id3]", "1", @session_params[:id3]) %>
-  <%= hidden_field_tag("pos_session[filler]", "1") %>
-  <%= autocomplete_field_tag 'inventory_object[status_tag_list]', '', autocomplete_tag_name_inventory_objects_path,
-      "data-delimiter" => ", " %>
-  <%= submit_tag 'Start' %>
+  <%= hidden_field_tag("pos_session[first]", false) %>
+    <% id1_class = "first" %>
+    <% id1_class += " last" unless (@session_params[:id2] || @session_params[:id3] || @session_params[:first] != 'false') %>
+    <%= f.input :id1, :input_html => {class: id1_class} %>
+  <% if @session_params[:id2] %>
+    <% id2_class = "last" unless @session_params[:id3] %>
+    <%= f.input :id2, :input_html => {class: id2_class} %>
+  <% end %>
+  <% if @session_params[:id3] %>
+    <%= f.input :id3, :input_html => {class: "last"} %>
+  <% end %>
+  <%= f.input :status_tag_list, 
+              :as => :autocomplete, 
+              :url => autocomplete_tag_name_inventory_objects_path, 
+              :input_html => {"data-delimiter" => ", ", class: "input-xlarge"} %>
+  <%= f.actions %>
 <% end %>

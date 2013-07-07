@@ -46,8 +46,8 @@ LoanedInventory::Application.routes.draw do
 	get "logout" => "sessions#destroy"
   
   #point of sale
-  get "point_of_sale/create" => "point_of_sale#tag"
-  post "point_of_sale/create" => "point_of_sale#tag"
+  get "point_of_sale/create"
+  post "point_of_sale/create"
   get "point_of_sale/lookup"
   post "point_of_sale/lookup"
   get "point_of_sale/search" => "point_of_sale#search"

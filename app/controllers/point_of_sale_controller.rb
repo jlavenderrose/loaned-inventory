@@ -2,11 +2,6 @@ class PointOfSaleController < ApplicationController
   autocomplete :loanee, :total_id
   
   def create
-    @inventory_object = InventoryObject.new
-    @session_params = {id1: true, id2: false, id3: false}
-  end
-  
-  def tag
 	@point_of_sale = true
     @session_params = params[:pos_session]
     @session_params = {id2: false, id3: false, first: true} if @session_params.nil?
@@ -74,6 +69,8 @@ class PointOfSaleController < ApplicationController
 		redirect_to root_path, notice: "No such record was located"
 	end
   end
+  
+  def 
   
   def array_wrap (obj)
     if obj.respond_to?('count')
