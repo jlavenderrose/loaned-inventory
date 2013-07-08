@@ -70,7 +70,24 @@ class PointOfSaleController < ApplicationController
 	end
   end
   
-  def 
+  def tag
+	@inventory_object = InventoryObject.new
+	if params[:inventory_object] then
+		if params[:inventory_object][:inventory_object_token] then
+			inventory_object = InventoryObject.find_by_id(params[:inventory_object][:inventory_object_token])
+			if inventory_object.present? then
+				inventory_object.status_tag_list += params[:inventory_object][:status_tag_list].split(", ")
+				inventory_object.save
+				flash[:notice] = "Tagged Inventory Object #{inventory_object.id1}" if inventory_object
+			end
+		end
+		
+		if params[:inventory_object][:status_tag_list].present? then
+			@inventory_object.status_tag_list = params[:inventory_object][:status_tag_list]
+		end
+	end
+	#render page
+  end
   
   def array_wrap (obj)
     if obj.respond_to?('count')

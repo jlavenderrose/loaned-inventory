@@ -52,6 +52,8 @@ LoanedInventory::Application.routes.draw do
   post "point_of_sale/lookup"
   get "point_of_sale/search" => "point_of_sale#search"
   post "point_of_sale/search" => "point_of_sale#find"
+  get "point_of_sale/tag"
+  post "point_of_sale/tag"
 
 	# You can have the root of your site routed with "root"
 	# just remember to delete public/index.html.

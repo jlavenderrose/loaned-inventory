@@ -57,7 +57,8 @@
 				<%= menu_item "Report Entries", report_entries_path %>
 			<% end %>
       <%= drop_down "POS" do %>
-        <%= menu_item "Create/Tag", point_of_sale_create_path %>
+        <%= menu_item "Create", point_of_sale_create_path %>
+        <%= menu_item "Tag", point_of_sale_tag_path %>
         <%= menu_item "Lookup", point_of_sale_lookup_path %>
       <% end %>
       <form class="navbar-search pull-left" action="<%= inventory_objects_path %>" method="get">

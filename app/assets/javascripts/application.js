@@ -21,9 +21,9 @@
 $(function () {
   tokens = {crossDomain: false, preventDuplicates: true, theme: 'facebook'}
   token = {crossDomain: false, preventDuplicates: true, tokenLimit: 1, theme: 'facebook'}
-  $('[id$="inventory_object_tokens"]').tokenInput('/inventory_objects.json', tokens);
-  $('[id$="loanee_tokens"]').tokenInput('/loanees.json', tokens);
-  $('[id$="inventory_object_token"]').tokenInput('/inventory_objects.json', token);
+  $('form:not(.auto-form) [id$="inventory_object_tokens"]').tokenInput('/inventory_objects.json', tokens);
+  $('form:not(.auto-form) [id$="loanee_tokens"]').tokenInput('/loanees.json', tokens);
+  $('form:not(.auto-form) [id$="inventory_object_token"]').tokenInput('/inventory_objects.json', token);
   $('form:not(.auto-form) [id$="loanee_token"]').tokenInput('/loanees.json', token);
   
   function point_of_sale() {

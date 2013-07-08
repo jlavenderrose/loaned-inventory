@@ -18,6 +18,28 @@ $(function() {
       $('form.auto-form [id$="loanee_token"]').focus();
     }
 	})
+	
+  $('form.auto-form [id$="inventory_object_token"].first').tokenInput('/point_of_sale/search', {
+	tokenValue: 'id',
+	preventDuplicates: true,
+	tokenLimit: 1,
+	theme: 'facebook',
+	
+	onResult: function(results) {
+		if (!$('#token-input-inventory_object_inventory_object_token').is(":focus")) {
+			$('form.auto-form [id$="inventory_object_token"].first').tokenInput("add", results[0])
+		}
+		return results
+	},
+	
+	onAdd: function() {
+		$("form.auto-form").submit()
+	},
+	
+	onReady: function() {
+		$('#token-input-inventory_object_inventory_object_token').focus()
+	}
+  })
   
   //auto focus first field
   console.log("focusing input.first")

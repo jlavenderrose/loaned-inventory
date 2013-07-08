@@ -1,5 +1,6 @@
 class InventoryObject < ActiveRecord::Base
   include FullTextQuery
+  include InventoryObjectTokenInputtable
 
   attr_accessible :id1, :id2, :id3,
           :name, :status_tag_list,

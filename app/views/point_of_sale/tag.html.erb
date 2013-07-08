@@ -1,0 +1,10 @@
+<%= semantic_form_for @inventory_object, url: point_of_sale_tag_path, html: {class:"auto-form"} do |f| %>
+	<%= f.inputs do %>
+		<%= f.input :inventory_object_token, input_html: {class:"first"}  %>
+		<%= f.input :status_tag_list, 
+					:as => :autocomplete, 
+					:url => autocomplete_tag_name_inventory_objects_path, 
+					:input_html => {"data-delimiter" => ", "} %>
+	<% end %>
+	<%= f.actions %>
+<% end %>
