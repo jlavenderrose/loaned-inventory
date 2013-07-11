@@ -2,6 +2,8 @@ require 'bundler/capistrano'
 
 default_run_options[:pty] = true
 
+set :test_log, "log/capistrano.test.log"
+
 set :gateway, "team4element.com"
 
 set :application, "LoanedInventory"
@@ -17,6 +19,17 @@ server "10.1.2.24", :app, :web, :db, :primary => true
 after 'deploy:create_symlink', 'deploy:symlink_db'
 
 namespace :deploy do
+  before 'deploy:update_code' do
+    puts "--> Running tests, please wait ..."
+    unless system "bundle exec rake > #{test_log} 2>&1" #' > /dev/null'
+      puts "--> Tests failed. Run `cat #{test_log}` to see what went wrong."
+      exit
+    else      
+      puts "--> Tests passed"
+      system "rm #{test_log}"
+    end
+  end
+
   desc 'Load DB schema - CAUTION: rewrites database!'
   task :load_schema, :roles => :app do
     run "cd #{current_path}; bundle exec rake db:schema:load RAILS_ENV=#{rails_env}"
