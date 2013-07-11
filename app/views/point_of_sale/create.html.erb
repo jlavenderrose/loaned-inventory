@@ -6,7 +6,7 @@
   <%= check_box_tag("pos_session[id3]", "1", @session_params[:id3]) %>
   <%= hidden_field_tag("pos_session[first]", false) %>
     <% id1_class = "first" %>
-    <% id1_class += " last" unless (@session_params[:id2] || @session_params[:id3] || @session_params[:first] != 'false') %>
+    <% id1_class += " last" unless (@session_params[:id2] || @session_params[:id3]) %>
     <%= f.input :id1, :input_html => {class: id1_class} %>
   <% if @session_params[:id2] %>
     <% id2_class = "last" unless @session_params[:id3] %>
