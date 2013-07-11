@@ -26,7 +26,6 @@ class PointOfSaleController < ApplicationController
     end
     @inventory_object = InventoryObject.new(params[:inventory_object])
     @inventory_object.id1 = nil
-    render 'tag'
   end
   
   def lookup

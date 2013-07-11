@@ -20,4 +20,9 @@
               :url => autocomplete_tag_name_inventory_objects_path, 
               :input_html => {"data-delimiter" => ", ", class: "input-xlarge"} %>
   <%= f.actions %>
+  <span id="auto"></span>
+	<%= javascript_tag do %>
+		window.autoSubmit = <%= j @session_params[:first] == 'false' ? 'true' : 'false'; %>
+		console.log("Setting window.autoSubmit")
+	<% end %>
 <% end %>
