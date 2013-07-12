@@ -8,6 +8,8 @@ class InventoryLoan < ActiveRecord::Base
   belongs_to :inventory_object
   belongs_to :loanee
   
+  has_many :audit_log_entries, as: :auditable
+  
   validates_associated :inventory_object
   validates_presence_of :inventory_object_id
   validates_associated :loanee
@@ -17,7 +19,13 @@ class InventoryLoan < ActiveRecord::Base
   
   #default values
   after_initialize :init
-  #before_validation :init
+  
+  after_create do
+	audit_log = audit_log_entries.new
+	audit_log.administrator = Administrator.current
+	audit_log.desc = "%a created %o at #{DateTime.now}"
+	audit_log.save
+  end
   
   #name accessors/getters
   def inventory_object_name=(name)

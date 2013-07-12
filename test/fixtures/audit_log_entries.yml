@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  desc: MyString
-
-two:
-  desc: MyString
+  desc: "%a %o"
+  administrator: "one"
+  auditable_id: "one"
+  auditable_type: InventoryLoan

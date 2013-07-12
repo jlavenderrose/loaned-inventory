@@ -12,8 +12,16 @@ class Administrator < ActiveRecord::Base
   has_many :report_entries
   has_many :report_entry_comments
   
+  def self.current
+    Thread.current[:administrator]
+  end
+  
+  def self.current=(user)
+    Thread.current[:administrator] = user
+  end
+  
   private
   def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
-	end
+  end
 end
