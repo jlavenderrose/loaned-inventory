@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130625053953) do
+ActiveRecord::Schema.define(:version => 20130712032706) do
 
   create_table "administrators", :force => true do |t|
     t.string   "fullname"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(:version => 20130625053953) do
 
   create_table "audit_log_entries", :force => true do |t|
     t.string   "desc"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
   end
 
   create_table "inventory_loans", :force => true do |t|
