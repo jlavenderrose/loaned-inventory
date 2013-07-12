@@ -3,5 +3,4 @@
 one:
   desc: "%a %o"
   administrator: "one"
-  auditable_id: "one"
-  auditable_type: InventoryLoan
+  auditable: one (InventoryLoan)

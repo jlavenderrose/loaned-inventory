@@ -10,6 +10,6 @@ class AuditLogEntryTest < ActiveSupport::TestCase
 	test "auditable message substitutitons" do
 		audit_log = AuditLogEntry.find(audit_log_entries(:one))
 		
-		assert audit_log.message.include?(audit_log.auditable.name), "performs substitution for auditable.name"
+		assert audit_log.message.include?(audit_log.auditable.audit_name), "performs substitution for auditable.name"
 	end
 end

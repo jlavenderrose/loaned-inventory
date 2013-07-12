@@ -27,6 +27,11 @@ class InventoryLoan < ActiveRecord::Base
 	audit_log.save
   end
   
+  #audit_name
+  def audit_name
+	"#{inventory_object_name} to #{loanee_name}"
+  end
+  
   #name accessors/getters
   def inventory_object_name=(name)
     object = InventoryObject.new.search(name)
