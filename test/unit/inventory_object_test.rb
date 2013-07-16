@@ -89,6 +89,7 @@ class InventoryObjectTest < ActiveSupport::TestCase
 	end
 	
 	assert_includes(inventory_object.audit_log_entries.last.message, "added: a", "Incorrect message for status_tag_list add")
+	refute_includes(inventory_object.audit_log_entries.last.message, "removed: a")
 	
 	assert_difference('inventory_object.audit_log_entries.count') do
 		inventory_object.status_tag_list = "b"
@@ -96,5 +97,6 @@ class InventoryObjectTest < ActiveSupport::TestCase
 	end
 	
 	assert_includes(inventory_object.audit_log_entries.last.message, "removed: a", "Incorrect message for status_tag_list remove")
+	refute_includes(inventory_object.audit_log_entries.last.message, "added: b")
   end
 end
