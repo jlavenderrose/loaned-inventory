@@ -23,11 +23,42 @@ class InventoryObject < ActiveRecord::Base
     end
   end
   
+  has_many :audit_log_entries, as: :auditable
+  
   validates :id1, :uniqueness => true, :presence => true
   validates :id2, :uniqueness => true, :allow_blank => true
   validates :id3, :uniqueness => true, :allow_blank => true
   validates_associated :inventory_object_version
   validates_presence_of :inventory_object_version_id
+  
+  after_create do
+	self.audit_log_entries.create(administrator_id: Administrator.current.id,
+								  desc: "%a created %o at #{self.created_at}")
+  end
+  
+  around_update :around_update_status_tag_list
+  
+  def around_update_status_tag_list
+	changed = self.changed
+	old_tags = self.status_tag_list_was.split ", "
+	yield
+	if changed.include? "status_tag_list" then
+		audit_log_entry = self.audit_log_entries.new
+		audit_log_entry.administrator = Administrator.current
+		
+		new_tags = self.status_tag_list.split ", "
+		removed = old_tags - new_tags
+		added = new_tags - old_tags
+		logger.debug new_tags
+		logger.debug old_tags
+		
+		audit_log_entry.desc = "%a updated status_tags "
+		audit_log_entry.desc += "added: #{added.join(", ")}" if added.present?
+		audit_log_entry.desc += "removed: #{removed.join(", ")}" if removed.present?
+		
+		audit_log_entry.save
+	end
+  end
   
   def human_name
     "#{self.inventory_object_version.name}: #{self.id1} #{self.id2} #{self.id3}"

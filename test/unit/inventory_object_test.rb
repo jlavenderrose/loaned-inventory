@@ -65,4 +65,36 @@ class InventoryObjectTest < ActiveSupport::TestCase
 	res = InventoryObject.search(inventory_objects(:one).id1)
 	assert(res.present?, "InventoryObject.search returns present result")
   end
+  
+  test 'creates audit_log_entry on create' do
+	#set Administrator.current
+	Administrator.current = administrators(:one)
+	inventory_object = InventoryObject.new
+	
+	assert_difference('inventory_object.audit_log_entries.count') do
+		inventory_object.id1 = inventory_objects(:one).id1+"F"
+		inventory_object.inventory_object_version_id = inventory_objects(:one).inventory_object_version.id
+		inventory_object.save
+	end
+  end
+  
+  test 'creates audit_log_entry on status_tag_list update' do
+	#set Administrator.current
+	Administrator.current = administrators(:one)
+	inventory_object = InventoryObject.find(inventory_objects(:one).id)
+	
+	assert_difference('inventory_object.audit_log_entries.count') do
+		inventory_object.status_tag_list = "a, b"
+		inventory_object.save 
+	end
+	
+	assert_includes(inventory_object.audit_log_entries.last.message, "added: a", "Incorrect message for status_tag_list add")
+	
+	assert_difference('inventory_object.audit_log_entries.count') do
+		inventory_object.status_tag_list = "b"
+		inventory_object.save
+	end
+	
+	assert_includes(inventory_object.audit_log_entries.last.message, "removed: a", "Incorrect message for status_tag_list remove")
+  end
 end
