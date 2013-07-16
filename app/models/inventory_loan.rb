@@ -23,8 +23,17 @@ class InventoryLoan < ActiveRecord::Base
   after_create do
 	audit_log = audit_log_entries.new
 	audit_log.administrator = Administrator.current
-	audit_log.desc = "%a created %o at #{DateTime.now}"
+	audit_log.desc = "%a created %o at #{self.created_at}"
 	audit_log.save
+  end
+  
+  around_update :around_update_audit
+  def around_update_audit 
+	changed = self.changed
+	yield
+	if changed.include? "returned_date" then
+		self.audit_log_entries.create(administrator_id: Administrator.current.id, desc: "%a closed %o at #{self.returned_date}")
+	end
   end
   
   #audit_name

@@ -5,7 +5,7 @@ class AuditLogEntry < ActiveRecord::Base
   
   #todo, figure out how to generate links here...
 
-  attr_accessible :desc
+  attr_accessible :desc, :administrator_id 
   
   belongs_to :auditable, polymorphic: true
   belongs_to :administrator
