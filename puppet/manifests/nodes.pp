@@ -13,11 +13,12 @@ node /test/ {
 				   'libsqlite3-dev', 'sqlite3', 'libxml2-dev', 'libxslt1-dev', 'autoconf', 
 				   'libc6-dev', 'libncurses5-dev', 'automake', 'libtool', 'libmysqlclient-dev']
 				   
-    package{ $ruby_build: ensure => latest }	
-
-	class { 'ruby':
-		version => '1.9.3'
+    #package{ $ruby_build: ensure => latest }
+    
+    rbenv::install { "vagrant":
+		group => "vagrant",
 	}
+    
 	
 	# apache
 	class {'apache': 

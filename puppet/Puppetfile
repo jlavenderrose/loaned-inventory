@@ -5,7 +5,7 @@ forge "http://forge.puppetlabs.com"
 mod 'puppetlabs/mysql'
 mod 'puppetlabs/apache'
 mod 'puppetlabs/passenger'
-mod 'puppetlabs/ruby'
+mod 'alup/rbenv', :git => 'https://github.com/alup/puppet-rbenv.git'
 
 #
 #mod "puppetlabs/razor"
