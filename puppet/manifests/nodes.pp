@@ -6,7 +6,20 @@ node /test/ {
 	class { 'mysql::server':
 		config_hash => { 'root_password' => '8ZcJZFHsvo7fINZcAvi0' }
 	}
+	
+	#ruby installation
+	$ruby_build = ['build-essential', 'bison', 'openssl', 'libreadline6', 'libreadline6-dev', 
+				   'curl', 'git-core', 'zlib1g', 'zlib1g-dev', 'libssl-dev', 'libyaml-dev', 
+				   'libsqlite3-dev', 'sqlite3', 'libxml2-dev', 'libxslt1-dev', 'autoconf', 
+				   'libc6-dev', 'libncurses5-dev', 'automake', 'libtool', 'libmysqlclient-dev']
+				   
+    package{ $ruby_build: ensure => latest }	
 
+	class { 'ruby':
+		version => '1.9.3'
+	}
+	
+	# apache
 	class {'apache': 
 		default_vhost => false
 	}

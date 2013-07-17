@@ -14,11 +14,8 @@ class basic::users{
 
 # just some packages
 class basic::packages{
-  package{"tmux": ensure => installed}
-  package{"curl": ensure => installed}
-  package{"vim":  ensure => installed}
-  package{"screen": ensure => installed}
-  package{"build-essential": ensure => installed}
+  $basic_package = ['tmux', 'vim', 'screen']
+  package{ $basic_package: ensure => installed }
 }
 
 

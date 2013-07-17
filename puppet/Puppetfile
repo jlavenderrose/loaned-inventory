@@ -5,6 +5,7 @@ forge "http://forge.puppetlabs.com"
 mod 'puppetlabs/mysql'
 mod 'puppetlabs/apache'
 mod 'puppetlabs/passenger'
+mod 'puppetlabs/ruby'
 
 #
 #mod "puppetlabs/razor"
