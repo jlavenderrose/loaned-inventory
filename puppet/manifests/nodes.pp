@@ -13,7 +13,14 @@ node /test/ {
 	
 	apache::vhost { 'default':
 		port => 80,
-		docroot => '/var/www/inventory'
+		docroot => '/var/www/inventory/public',
+		directories => [
+			{
+			 path => '/var/www/inventory/public',
+			 allow => 'from all',
+			 options => ['-MultiViews']
+			}
+		]
 	}
 	include apache::mod::passenger
 
