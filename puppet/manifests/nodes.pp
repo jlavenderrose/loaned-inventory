@@ -1,28 +1,31 @@
 node default {
-  # Configure mysql
-  class { 'mysql::server':
-    config_hash => { 'root_password' => '8ZcJZFHsvo7fINZcAvi0' }
-  }
-  include mysql::php
+}
 
-  # Configure apache
-  class { apache: 
-	mpm_module => 'prefork'
-  }
-  include apache::mod::php
-  apache::vhost { $::fqdn:
-    port    => '80',
-    docroot => '/var/www/test',
-    require => File['/var/www/test'],
-  }
+node /test/ {
+	# Configure mysql
+	class { 'mysql::server':
+		config_hash => { 'root_password' => '8ZcJZFHsvo7fINZcAvi0' }
+	}
 
-  # Configure Docroot and index.html
-  file { ['/var/www', '/var/www/test']:
-    ensure => directory
-  }
+	class {'apache': 
+		default_vhost => false
+	}
+	
+	apache::vhost { 'default':
+		port => 80,
+		docroot => '/var/www/inventory'
+	}
+	include apache::mod::passenger
 
-  file { '/var/www/test/index.php':
-    ensure  => file,
-    content => '<?php echo \'<p>Hello World</p>\'; ?> ',
-  }
+
+	# Configure Docroot and index.html
+	file { '/var/www':
+		ensure => directory
+	} 
+
+	file { '/var/www/inventory':
+		ensure => 'link',
+		target => '/vagrant',
+		require => File['/var/www']
+	}
 }

@@ -18,6 +18,7 @@ class basic::packages{
   package{"curl": ensure => installed}
   package{"vim":  ensure => installed}
   package{"screen": ensure => installed}
+  package{"build-essential": ensure => installed}
 }
 
 
