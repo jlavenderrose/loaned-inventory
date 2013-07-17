@@ -9,6 +9,9 @@
 
 # Ignore vagrant
 /.vagrant
+# Ignore librarian
+/.librarian
+/modules
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -19,3 +22,5 @@
 
 # Ignore precompiled assets
 /public/assets
+.tmp/
+modules/
