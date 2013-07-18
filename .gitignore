@@ -12,6 +12,8 @@
 # Ignore librarian
 /.librarian
 /modules
+# Ignore rbenv
+.ruby-version
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
