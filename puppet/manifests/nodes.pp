@@ -9,6 +9,8 @@ node /test/ {
 				   
     $bundle_dep = ['sqlite3', 'libmysqlclient-dev', 'libsqlite3-dev']
     $passenger_dep = ['libcurl4-openssl-dev','apache2-threaded-dev', 'libapr1-dev', 'libaprutil1-dev']
+    $gems = ['puppet', 'passenger']
+    
     package{ $bundle_dep: ensure => latest }
     package{ $passenger_dep: ensure => latest }
     
@@ -23,18 +25,16 @@ node /test/ {
 	rbenv::compile { $ruby_version:
 		user => "vagrant"
 	}->
-	$gems = ['puppet', 'passenger']
+	
 	rbenv::gem { $gems:
 		user => "vagrant",
 		ruby => $ruby_version
-	}->
-	class {'apache': 
-		default_vhost => false
 	}->
 	exec {
 	  'install-passenger':
 		command => 'passenger-install-apache2-module --auto',
 		path => "${deploy_home}/.rbenv/bin:${deploy_home}/.rbenv/versions/${ruby_version}/bin:/bin:/usr/bin",
+		creates => "/home/vagrant/.rbenv/versions/1.9.3-p327/lib/ruby/gems/1.9.1/gems/passenger-4.0.10/buildout/apache2/mod_passenger.so",
 		user => 'root',
 		require => Package[$passenger_dep]
 	}->	
@@ -49,11 +49,15 @@ node /test/ {
 		path => "${deploy_home}/.rbenv/bin:${deploy_home}/.rbenv/versions/${ruby_version}/bin:/bin:/usr/bin",
 		user => "vagrant",
 		require => [File['/var/www/inventory/.ruby-version', '/var/www/inventory/'], Package[$bundle_dep]]
+	}->
+	class {'apache': 
+		default_vhost => false
 	}
 	
 	apache::vhost { 'default':
 		port => 80,
 		docroot => '/var/www/inventory/public',
+		custom_fragment => 'RackEnv development',
 		directories => [
 			{
 			 path => '/var/www/inventory/public',
