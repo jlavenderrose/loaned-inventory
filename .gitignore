@@ -26,3 +26,6 @@
 /public/assets
 .tmp/
 modules/
+
+# Ignore vim swp files
+*.swp

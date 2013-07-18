@@ -43,6 +43,13 @@ class InventoryObjectsControllerTest < ActionController::TestCase
     assert_redirected_to inventory_object_path(assigns(:inventory_object))
   end
 
+  test "should update inventory_object status_tags_list" do
+	assert_difference('@inventory_object.audit_log_entries.count') do
+  		put :update, id: @inventory_object, inventory_object: {status_tag_list: "a, b, c"}
+		assert_redirected_to inventory_object_path(assigns(:inventory_object))
+	end
+  end
+
   test "should destroy inventory_object" do
     assert_difference('InventoryObject.count', -1) do
       delete :destroy, id: @inventory_object

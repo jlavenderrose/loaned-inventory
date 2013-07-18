@@ -40,21 +40,20 @@ class InventoryObject < ActiveRecord::Base
   
   def around_update_status_tag_list
 	changed = self.changed
-	old_tags = self.status_tag_list_was.split ", "
+	changes = self.changes
 	yield
 	if changed.include? "status_tag_list" then
 		audit_log_entry = self.audit_log_entries.new
 		audit_log_entry.administrator = Administrator.current
-		
-		new_tags = self.status_tag_list.split ", "
+
+		old_tags = changes[:status_tag_list][0].split(", ")
+		new_tags = changes[:status_tag_list][1]
 		removed = old_tags - new_tags
 		added = new_tags - old_tags
-		logger.debug new_tags
-		logger.debug old_tags
 		
-		audit_log_entry.desc = "%a updated status_tags "
-		audit_log_entry.desc += "added: #{added.join(", ")}" if added.present?
-		audit_log_entry.desc += "removed: #{removed.join(", ")}" if removed.present?
+		audit_log_entry.desc = "%a updated %o status_tags"
+		audit_log_entry.desc += " added: #{added.join(", ")}" if added.present?
+		audit_log_entry.desc += " removed: #{removed.join(", ")}" if removed.present?
 		
 		audit_log_entry.save
 	end
@@ -62,6 +61,10 @@ class InventoryObject < ActiveRecord::Base
   
   def human_name
     "#{self.inventory_object_version.name}: #{self.id1} #{self.id2} #{self.id3}"
+  end
+
+  def audit_name
+	human_name
   end
   
   def search(query, scope=nil)
