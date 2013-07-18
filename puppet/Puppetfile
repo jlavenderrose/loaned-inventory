@@ -5,17 +5,7 @@ forge "http://forge.puppetlabs.com"
 mod 'puppetlabs/mysql'
 mod 'puppetlabs/apache'
 mod 'puppetlabs/passenger'
-mod 'alup/rbenv', :git => 'https://github.com/alup/puppet-rbenv.git'
-
-#
-#mod "puppetlabs/razor"
-# mod "puppetlabs/ntp", "0.0.3"
-#
-#mod "apt",
-#   :git => "git://github.com/puppetlabs/puppetlabs-apt.git"
+mod 'alup/rbenv', :git => 'git@github.com:jlulian38/puppet-rbenv.git'
 
 mod "stdlib",
    :git => "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-
-
-#mod 'rvm', :git => "git://github.com/blt04/puppet-rvm.git"

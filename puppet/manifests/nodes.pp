@@ -15,11 +15,19 @@ node /test/ {
 				   
     #package{ $ruby_build: ensure => latest }
     
-    rbenv::install { "vagrant":
-		group => "vagrant",
-	}
+    $ruby_version = "1.9.3-p327"
     
-	
+    rbenv::install { "vagrant":
+		group => "vagrant"
+	}
+	rbenv::compile { $ruby_version:
+		user => "vagrant"
+	}
+	rbenv::gem { "puppet":
+		user => "vagrant",
+		ruby => $ruby_version
+	}
+    	
 	# apache
 	class {'apache': 
 		default_vhost => false
