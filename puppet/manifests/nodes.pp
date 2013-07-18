@@ -6,6 +6,13 @@ node /test/ {
 	class { 'mysql::server':
 		config_hash => { 'root_password' => '8ZcJZFHsvo7fINZcAvi0' }
 	}
+	
+	mysql::db { 'railsinventory':
+		user => 'rails',
+		password => 'rails',
+		host => 'localhost',
+		grant => ['all']
+	}
 				   
     $bundle_dep = ['sqlite3', 'libmysqlclient-dev', 'libsqlite3-dev']
     $passenger_dep = ['libcurl4-openssl-dev','apache2-threaded-dev', 'libapr1-dev', 'libaprutil1-dev']
