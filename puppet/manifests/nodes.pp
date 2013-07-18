@@ -22,7 +22,7 @@ node /test/ {
 	}
 	rbenv::compile { $ruby_version:
 		user => "vagrant"
-	}
+	}->
 	$gems = ['puppet', 'passenger']
 	rbenv::gem { $gems:
 		user => "vagrant",
@@ -37,19 +37,18 @@ node /test/ {
 		path => "${deploy_home}/.rbenv/bin:${deploy_home}/.rbenv/versions/${ruby_version}/bin:/bin:/usr/bin",
 		user => 'root',
 		require => Package[$passenger_dep]
-	}
-	
+	}->	
 	file { '/var/www/inventory/.ruby-version':
 		ensure => file,
 		owner => 'vagrant',
 		group => 'vagrant',
 		content => $ruby_version
-	}
+	}->
 	exec { 'bundle install':
 		cwd => "/var/www/inventory",
 		path => "${deploy_home}/.rbenv/bin:${deploy_home}/.rbenv/versions/${ruby_version}/bin:/bin:/usr/bin",
 		user => "vagrant",
-		require => [File['/var/www/inventory/.ruby-version'], Package[$bundle_dep]]
+		require => [File['/var/www/inventory/.ruby-version', '/var/www/inventory/'], Package[$bundle_dep]]
 	}
 	
 	apache::vhost { 'default':
@@ -76,6 +75,7 @@ node /test/ {
         owner   => '0',
         group   => '0',
         mode    => '0644',
+        notify  => Service['httpd'],
       }
 
       file { '/etc/apache2/mods-available/passenger.conf':
@@ -85,6 +85,7 @@ PassengerDefaultRuby /home/vagrant/.rbenv/versions/1.9.3-p327/bin/ruby",
         owner   => '0',
         group   => '0',
         mode    => '0644',
+        notify  => Service['httpd'],
       }
 
       file { '/etc/apache2/mods-enabled/passenger.load':
