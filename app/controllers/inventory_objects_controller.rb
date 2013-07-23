@@ -165,10 +165,7 @@ class InventoryObjectsController < ApplicationController
     end
   end
   
-  #CSV import
-  def import
-  end
-  
+  #CSV import  
   def upload
 	if params[:csv] then
 		csv = CSV.new(params[:csv].read, :headers => :true,
@@ -182,12 +179,12 @@ class InventoryObjectsController < ApplicationController
 					version = 0
 					unless row['type'].nil? then
 							type = InventoryObjectType.new.findcreate(row['type'])
-							version = type.versions.findcreate(row['version'])
+							version = type.inventory_object_versions.findcreate(row['version'])
 						else
 							version = InventoryObjectVersion.find_by_name(row['version'])
 					end
 					if version then
-						object = version.objects.create(id1: row['id1'], id2: row['id2'], id3: row['id3'])
+						object = version.inventory_objects.create(id1: row['id1'], id2: row['id2'], id3: row['id3'])
 						
 						@good << {:row => row, :errors => object.errors} if object.valid?
 						@bad << {:row => row, :errors => object.errors} unless object.valid?

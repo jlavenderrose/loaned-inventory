@@ -14,5 +14,4 @@ Vagrant::Config.run do |config|
   
   #give VM 1GB of RAM (hopefully make rails happier)
 	config.vm.customize ["modifyvm", :id, "--memory", 1024]
-	config.vm.customize ["modifyvm", :id, "--cpus", 2]
 end

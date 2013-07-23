@@ -30,3 +30,5 @@ modules/
 
 # Ignore vim swp files
 *.swp
+# Ignore rails temporary files
+.sass-cache

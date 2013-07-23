@@ -1,4 +1,5 @@
 require 'test_helper'
+include ActionDispatch::TestProcess
 
 class InventoryObjectsControllerTest < ActionController::TestCase
   setup do
@@ -77,5 +78,24 @@ class InventoryObjectsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to inventory_objects_path
+  end
+  
+  test "should get import" do
+	get :import
+	assert_response :success
+  end
+  
+  test "should do import" do
+	inventory_object_import_test = fixture_file_upload('inventory_object_import_test.csv', 'text/csv')
+	
+	assert_difference "InventoryObject.count" do
+	assert_difference "InventoryObjectVersion.count" do
+	assert_difference "InventoryObjectType.count" do
+	post :upload, :csv => inventory_object_import_test
+	end
+	end
+	end
+	
+	assert_response :success
   end
 end
