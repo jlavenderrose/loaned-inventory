@@ -53,6 +53,7 @@ GEM
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    facter (1.7.2)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     formtastic-bootstrap (2.1.2)
@@ -159,6 +160,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   comma
+  facter
   formtastic
   formtastic-bootstrap
   jquery-hotkeys-rails

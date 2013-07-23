@@ -11,4 +11,8 @@ Vagrant::Config.run do |config|
   # This shell provisioner installs librarian-puppet and runs it to install
   # puppet modules. After that it just runs puppet
   config.vm.provision :shell, :path => "shell/bootstrap.sh"
+  
+  #give VM 1GB of RAM (hopefully make rails happier)
+	config.vm.customize ["modifyvm", :id, "--memory", 1024]
+	config.vm.customize ["modifyvm", :id, "--cpus", 2]
 end
