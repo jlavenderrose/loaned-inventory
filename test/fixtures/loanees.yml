@@ -3,3 +3,7 @@
 one:
   fullname: MyString
   idnum: MyString
+  
+two:
+  fullname: Test Loanee
+  idnum: 1

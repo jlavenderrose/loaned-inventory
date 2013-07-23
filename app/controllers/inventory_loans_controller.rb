@@ -113,9 +113,6 @@ class InventoryLoansController < ApplicationController
     end
   end
   #CSV import
-  def import
-  end
-  
   def upload
 	if params[:csv] then
 		csv = CSV.new(params[:csv].read, :headers => :true,

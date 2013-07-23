@@ -76,4 +76,19 @@ class InventoryLoansControllerTest < ActionController::TestCase
 
     assert_redirected_to inventory_loans_path
   end
+  
+  test "should get import" do
+	get :import
+	assert_response :success
+  end
+  
+  test "should do import" do
+	inventory_loans_import_test = fixture_file_upload('inventory_loans_import_test.csv', 'text/csv')
+	
+	assert_difference "InventoryLoan.count" do
+		post :upload, :csv => inventory_loans_import_test
+	end
+	
+	assert_response :success
+  end
 end

@@ -11,3 +11,7 @@ two:
   id2: MyStringA
   id3: MyStringA
   inventory_object_version: "two"
+  
+inventory_loan_test:
+  id1: Loaner
+  inventory_object_version: "one"
