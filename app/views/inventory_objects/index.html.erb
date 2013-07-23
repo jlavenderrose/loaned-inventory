@@ -6,6 +6,7 @@
 	<%= text_field_tag "search[idnum]", @search[:idnum], placeholder: "InventoryObject ID"%>
 	<%= text_field_tag "search[tags]", @search[:tags], placeholder: "InventoryObject Tags" %>
 	<%= select_tag 'search[versionid]', "<option value='0'>All</option>".html_safe+options_from_collection_for_select(InventoryObjectVersion.type_sorted.all, 'id', 'name', @search[:versionid]) %>
+	<%= select_tag 'search[typeid]', "<option value='0'>All</option>".html_safe+options_from_collection_for_select(InventoryObjectType.all, 'id', 'name', @search[:typeid]) %>
 	<%= submit_tag 'Search', class: "btn btn-small" %>
 <% end %>
 <% if @inventory_objects %>

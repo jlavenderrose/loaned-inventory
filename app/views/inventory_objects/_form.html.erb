@@ -2,7 +2,7 @@
     <%= f.inputs do %>
     <% unless @inventory_object.new_record? %>
       <%= f.input :inventory_object_version, :as => :select, 
-        :collection => @inventory_object.inventory_object_version.inventory_object_type.versions.all %>
+        :collection => @inventory_object.inventory_object_version.inventory_object_type.inventory_object_versions.all %>
     <% else %>
       <%= f.input :inventory_object_version, :as => :select, :collection => InventoryObjectVersion.type_sorted.all %>
     <% end %>

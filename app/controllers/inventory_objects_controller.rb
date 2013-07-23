@@ -20,10 +20,13 @@ class InventoryObjectsController < ApplicationController
     end
     
     if params[:search] then
-		unless params[:search][:versionid].to_i == 0 then
+		unless params[:search][:versionid].to_i == 0 and params[:search][:typeid].to_i == 0 then
 			logger.debug "Adv. Search: By InventoryObjectVersion"
-			version = InventoryObjectVersion.find(params[:search][:versionid]) if params[:search][:versionid]
+			version = InventoryObjectVersion.find(params[:search][:versionid]) if params[:search][:versionid] and params[:search][:versionid].to_i != 0
+			type = InventoryObjectType.find(params[:search][:typeid]) if params[:search][:typeid] and params[:search][:typeid].to_i != 0
 			base = version.objects if version
+			logger.debug "Setting by type" if type and not base
+			base = type.inventory_objects if type and not base
 			base = InventoryObject unless base
 		else
 			logger.debug "Adv. Search: By ALL"
@@ -53,7 +56,7 @@ class InventoryObjectsController < ApplicationController
     logger.debug @search
     respond_to do |format|
       format.html {
-        if @inventory_objects.count == 1 then
+        if @inventory_objects.count == 1 and not params[:search] then
           redirect_to @inventory_objects.first
         else
           render

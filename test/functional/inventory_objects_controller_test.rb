@@ -10,6 +10,27 @@ class InventoryObjectsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:inventory_objects)
+    
+    assert_select "#search_idnum"
+    assert_select "#search_tags"
+    assert_select "#search_versionid"
+    assert_select "#search_typeid"
+  end
+  
+  test "get index w/ type search" do
+	get :index, :search => { typeid: inventory_object_types(:two).id } 
+	
+	other_type = InventoryObjectType.find(inventory_object_types(:one).id)
+	
+	assert_response :success
+	refute_includes assigns(:inventory_objects), other_type.inventory_objects.first
+  end
+  
+  test "get index w/ all search" do
+	get :index, :search => { versionid: 0, typeid: 0 }
+	
+	assert_response :success
+	assert_includes assigns(:inventory_objects), InventoryObject.last
   end
 
   test "should get new" do

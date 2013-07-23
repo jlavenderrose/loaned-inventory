@@ -2,3 +2,6 @@
 
 one:
   name: MyString
+  
+two:
+  name: MyStringB

@@ -10,4 +10,4 @@ two:
   id1: MyStringA
   id2: MyStringA
   id3: MyStringA
-  inventory_object_version: "one"
+  inventory_object_version: "two"

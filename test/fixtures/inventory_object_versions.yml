@@ -4,3 +4,7 @@ one:
   name: MyString
   inventory_object_type: "one"
   
+two:
+  name: MyStringABC
+  inventory_object_type: "two"
+  
