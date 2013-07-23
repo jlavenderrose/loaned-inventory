@@ -47,4 +47,19 @@ class LoaneesControllerTest < ActionController::TestCase
 
     assert_redirected_to loanees_path
   end
+  
+  test "should get import" do
+	get :import
+	assert_response :success
+  end
+  
+  test "should do import" do
+	loanee_import_test = fixture_file_upload('loanee_import_test.csv', 'text/csv')
+	
+	assert_difference "Loanee.count" do
+		post :upload, :csv => loanee_import_test
+	end
+	
+	assert_response :success
+  end
 end

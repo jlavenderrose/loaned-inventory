@@ -1,5 +1,4 @@
 require 'test_helper'
-include ActionDispatch::TestProcess
 
 class InventoryObjectsControllerTest < ActionController::TestCase
   setup do
