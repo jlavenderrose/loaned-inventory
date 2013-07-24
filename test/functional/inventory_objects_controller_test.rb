@@ -32,6 +32,28 @@ class InventoryObjectsControllerTest < ActionController::TestCase
 	assert_response :success
 	assert_includes assigns(:inventory_objects), InventoryObject.last
   end
+  
+  test "get index w/ tag search" do
+	inventory_object = InventoryObject.find(inventory_objects(:one).id)
+	inventory_object.status_tag_list = "a"
+	inventory_object.save
+	
+	get :index, :q => "a"
+	
+	assert_response :success
+	assert_includes assigns(:inventory_objects), inventory_object
+	assert_select "#search_tags[value='a']"
+  end
+  
+  test "get index w/ id search" do
+	inventory_object = InventoryObject.find(inventory_objects(:one).id)
+	
+	get :index, :q => inventory_object.id1
+	
+	assert_response :success
+	assert_includes assigns(:inventory_objects), inventory_object
+	assert_select "#search_idnum[value='#{inventory_object.id1}']"
+  end
 
   test "should get new" do
     get :new

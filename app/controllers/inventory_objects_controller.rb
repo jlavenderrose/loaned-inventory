@@ -12,10 +12,12 @@ class InventoryObjectsController < ApplicationController
     @search = {versionid: 0}
     filename = "blank"
     if params[:q].present? then
-      @inventory_objects = array_wrap InventoryObject.new.search(params[:q])
-      @inventory_objects += array_wrap InventoryObject.tagged_with(params[:q].downcase)
+      idnum = array_wrap InventoryObject.new.search(params[:q])
+      tag = array_wrap InventoryObject.tagged_with(params[:q].downcase)
+      @inventory_objects = idnum + tag
       
-      @search = {idnum: params[:q]}
+      @search[:idnum] = params[:q] if idnum.present?
+      @search[:tags] = params[:q] if tag.present?
       filename = params[:q].gsub(/[^A-z0-9]/,'_')
     end
     
@@ -56,11 +58,7 @@ class InventoryObjectsController < ApplicationController
     logger.debug @search
     respond_to do |format|
       format.html {
-        if @inventory_objects.count == 1 and not params[:search] then
-          redirect_to @inventory_objects.first
-        else
           render
-        end
       }
       #jQuery TokenInput support
       format.json { 
