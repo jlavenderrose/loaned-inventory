@@ -11,6 +11,8 @@ class InventoryLoansControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:inventory_loans)
+    
+    assert_select "[href$=?open=true]"
   end
   
   test "should get open loan index" do

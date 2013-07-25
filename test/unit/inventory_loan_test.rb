@@ -26,4 +26,10 @@ class InventoryLoanTest < ActiveSupport::TestCase
 	
 		assert inventory_loan.audit_log_entries.last.message.present?, "audit log has message"
 	end
+	
+	test "open scope" do
+		inventory_loans = InventoryLoan.open.all
+		
+		refute_includes inventory_loans, inventory_loans(:one)
+	end
 end

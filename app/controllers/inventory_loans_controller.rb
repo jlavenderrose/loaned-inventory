@@ -2,11 +2,18 @@ class InventoryLoansController < ApplicationController
   # GET /inventory_loans
   # GET /inventory_loans.json
   def index
-    @inventory_loans = InventoryLoan.all
+	unless params[:open].present? then
+		@inventory_loans = InventoryLoan.all
+	else
+		@inventory_loans = InventoryLoan.open.all
+	end
+    
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @inventory_loans }
+      format.csv { render :csv => @inventory_loans,
+						  :filename => "inventory_loans.csv" }
     end
   end
 

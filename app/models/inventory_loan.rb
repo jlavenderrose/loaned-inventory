@@ -17,6 +17,8 @@ class InventoryLoan < ActiveRecord::Base
   validates :loaned_date, :presence => :true
   validate :only_current_loan, :on => :create
   
+  scope :open, -> {where("inventory_loans.returned_date IS NOT NULL") }
+  
   #default values
   after_initialize :init
   
