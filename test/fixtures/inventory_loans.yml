@@ -5,3 +5,9 @@ one:
   returned_date:
   loanee: "one"
   inventory_object: "one"
+  
+two:
+  loaned_date: 2013-06-10
+  returned_date: 2013-06-11
+  loanee: "one"
+  inventory_object: "two"

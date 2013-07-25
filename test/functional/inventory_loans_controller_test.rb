@@ -12,6 +12,20 @@ class InventoryLoansControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:inventory_loans)
   end
+  
+  test "should get open loan index" do
+	get :index, :open => "true"
+	
+	assert_response :success
+	refute_includes assigns(:inventory_loans), inventory_loans(:one)
+  end
+  
+  test "should get open loan index csv" do
+	get :index, {:open => "true", :format => "csv" }
+	
+	assert_response :success
+	refute_includes assigns(:inventory_loans), inventory_loans(:one)
+  end
 
   test "should get new" do
     get :new
